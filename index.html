@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>モテ度 本格診断｜行動科学×AI分析</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #080808;
+    --bg2: #111111;
+    --bg3: #181818;
+    --border: rgba(255,255,255,0.08);
+    --border-accent: rgba(255,200,60,0.3);
+    --gold: #F5C842;
+    --gold2: #E8A820;
+    --text: rgba(255,255,255,0.85);
+    --text-dim: rgba(255,255,255,0.4);
+    --text-faint: rgba(255,255,255,0.18);
+    --accent: #FF6B35;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── 背景グレイン ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrap { max-width: 540px; margin: 0 auto; padding: 0 20px 80px; position: relative; z-index: 1; }
+
+  /* ── アニメーション ── */
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+  @keyframes scaleIn { from{transform:scale(0.94);opacity:0} to{transform:scale(1);opacity:1} }
+
+  .anim-fadeup { animation: fadeUp 0.5s cubic-bezier(.22,.68,0,1.2) forwards; }
+  .anim-scalein { animation: scaleIn 0.4s cubic-bezier(.22,.68,0,1.2) forwards; }
+
+  /* ── セクション切替 ── */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ════ INTRO ════ */
+  #intro { padding-top: 60px; text-align: center; }
+
+  .hero-icon { font-size: 52px; margin-bottom: 16px; display: block; }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px; font-weight: 600;
+    color: #fff; letter-spacing: 0.04em;
+    line-height: 1.2; margin-bottom: 6px;
+  }
+
+  .hero-sub {
+    font-size: 11px; color: var(--text-faint);
+    letter-spacing: 0.2em; font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .intro-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 24px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .intro-card p {
+    font-size: 13.5px; line-height: 1.9;
+    color: rgba(255,255,255,0.6); font-weight: 300;
+  }
+
+  .intro-card p em {
+    color: var(--gold); font-style: normal; font-weight: 500;
+  }
+
+  .badge-row {
+    display: flex; gap: 8px; margin-bottom: 28px; justify-content: center;
+  }
+
+  .badge-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center; flex: 1;
+  }
+
+  .badge-item .bi { font-size: 18px; margin-bottom: 5px; }
+  .badge-item .bl { font-size: 11px; color: var(--text-dim); font-weight: 300; }
+
+  .scale-legend {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+
+  .scale-legend .sl-title {
+    font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.12em; margin-bottom: 12px; font-weight: 500;
+  }
+
+  .scale-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .scale-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: rgba(255,255,255,0.55);
+  }
+
+  .scale-num {
+    width: 22px; height: 22px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
+
+  /* ── ボタン ── */
+  .btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    border: none; border-radius: 14px;
+    color: #000; font-weight: 700;
+    font-size: 15px; padding: 16px;
+    cursor: pointer; transition: all 0.22s;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.06em;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(245,200,66,0.35); }
+  .btn-primary:disabled { opacity: 0.25; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .btn-ghost {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 12px; color: var(--text-dim);
+    font-size: 13px; padding: 13px;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'Noto Sans JP', sans-serif;
+    margin-top: 10px;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
+
+  /* ════ QUIZ ════ */
+  #quiz { padding-top: 36px; }
+
+  .progress-wrap { margin-bottom: 24px; }
+
+  .progress-top {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 8px;
+  }
+
+  .cat-badge {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 12px; border-radius: 20px;
+    letter-spacing: 0.08em;
+    background: rgba(245,200,66,0.12);
+    color: var(--gold);
+    border: 1px solid rgba(245,200,66,0.2);
+  }
+
+  .q-count { font-size: 12px; color: var(--text-faint); }
+
+  .progress-bar {
+    height: 3px; background: rgba(255,255,255,0.06);
+    border-radius: 2px; overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold2), var(--gold));
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+
+  .basis-label {
+    font-size: 10px; color: var(--text-faint);
+    text-align: right; margin-top: 5px;
+    letter-spacing: 0.08em;
+  }
+
+  .q-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+  }
+
+  .q-text {
+    font-size: 16px; font-weight: 500;
+    line-height: 1.7; color: #fff;
+  }
+
+  /* 選択肢 */
+  .opts { margin-bottom: 4px; }
+
+  .opt-btn {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: rgba(255,255,255,0.65);
+    padding: 12px 16px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.18s;
+    margin-bottom: 7px;
+    line-height: 1.5;
+    font-family: 'Noto Sans JP', sans-serif;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .opt-btn:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.2);
+    transform: translateX(3px);
+  }
+
+  .opt-btn.selected {
+    background: rgba(245,200,66,0.1);
+    border-color: var(--gold);
+    color: #FFE080;
+  }
+
+  .opt-num {
+    width: 24px; height: 24px;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.07);
+    color: var(--text-dim);
+    transition: all 0.18s;
+  }
+
+  .opt-btn.selected .opt-num {
+    background: var(--gold);
+    color: #000;
+  }
+
+  /* ════ LOADING ════ */
+  #loading { padding-top: 100px; text-align: center; }
+
+  .spinner {
+    width: 48px; height: 48px;
+    border: 2.5px solid rgba(245,200,66,0.12);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.85s linear infinite;
+    margin: 0 auto 28px;
+  }
+
+  .loading-text {
+    font-size: 13px; color: var(--gold);
+    letter-spacing: 0.14em;
+    animation: pulse 1.8s ease infinite;
+    margin-bottom: 8px;
+  }
+
+  .loading-sub {
+    font-size: 11px; color: var(--text-faint);
+    letter-spacing: 0.08em;
+  }
+
+  .score-preview {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 8px;
+    margin-top: 36px;
+  }
+
+  .score-chip {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px; text-align: center;
+  }
+
+  .sc-cat { font-size: 11px; color: var(--gold); font-weight: 700; }
+  .sc-val { font-size: 17px; font-weight: 700; color: #fff; }
+  .sc-max { font-size: 10px; color: var(--text-faint); }
+
+  /* ════ RESULT ════ */
+  #result { padding-top: 40px; }
+
+  .rank-card {
+    border-radius: 22px;
+    padding: 30px 24px;
+    text-align: center;
+    margin-bottom: 14px;
+    position: relative; overflow: hidden;
+  }
+
+  .rank-glow {
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .rank-label {
+    font-size: 11px; color: rgba(255,255,255,0.35);
+    letter-spacing: 0.18em; margin-bottom: 8px;
+  }
+
+  .rank-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px; font-weight: 600;
+    line-height: 1;
+  }
+
+  .rank-denom {
+    font-size: 13px; color: rgba(255,255,255,0.3);
+    margin: 4px 0 14px;
+  }
+
+  .rank-type-badge {
+    display: inline-block;
+    border-radius: 24px;
+    padding: 5px 18px;
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .rank-sub {
+    font-size: 12px; color: rgba(255,255,255,0.35);
+    margin-top: 6px; letter-spacing: 0.06em;
+  }
+
+  /* カテゴリバー */
+  .cat-bars { margin-top: 22px; text-align: left; }
+
+  .cat-bar-row { margin-bottom: 10px; }
+
+  .cat-bar-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .cat-bar-name { font-size: 11px; color: rgba(255,255,255,0.45); }
+  .cat-bar-val { font-size: 11px; font-weight: 700; }
+
+  .cat-bar-bg {
+    height: 5px; background: rgba(255,255,255,0.06);
+    border-radius: 3px; overflow: hidden;
+  }
+
+  .cat-bar-fill {
+    height: 100%; border-radius: 3px;
+    transition: width 1s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* AI分析レポート */
+  .ai-report {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 12px;
+  }
+
+  .ai-report-title {
+    font-size: 11px; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.14em;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .ai-content {
+    font-size: 13.5px; line-height: 1.9;
+    color: rgba(255,255,255,0.75); font-weight: 300;
+  }
+
+  .ai-content h2 {
+    font-size: 15px; font-weight: 700;
+    color: var(--gold);
+    margin: 20px 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(245,200,66,0.15);
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .ai-content h3 {
+    font-size: 14px; font-weight: 600;
+    color: rgba(255,220,100,0.9);
+    margin: 14px 0 6px;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .ai-content p { margin: 8px 0; }
+
+  .ai-content strong { color: var(--gold); font-weight: 600; }
+
+  .ai-content ul { padding-left: 0; list-style: none; }
+  .ai-content ul li {
+    padding: 4px 0 4px 16px;
+    position: relative; color: rgba(255,255,255,0.75);
+  }
+  .ai-content ul li::before {
+    content: '›';
+    position: absolute; left: 0;
+    color: var(--gold); font-weight: 700;
+  }
+
+  /* 使用尺度 */
+  .scales-wrap {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+  }
+
+  .scales-title {
+    font-size: 10px; color: var(--text-faint);
+    letter-spacing: 0.14em; margin-bottom: 10px;
+  }
+
+  .scales-list {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+
+  .scale-tag {
+    font-size: 10px; padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    color: rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ════ INTRO ════ -->
+  <div id="intro" class="section active anim-fadeup">
+    <span class="hero-icon">💘</span>
+    <h1 class="hero-title">モテ度 本格診断</h1>
+    <p class="hero-sub">MEN'S ATTRACTION ANALYSIS · BEHAVIORAL SCIENCE × AI</p>
+
+    <div class="intro-card">
+      <p>
+        この診断は、<em>NEO-FFI（外向性・協調性）・IRI（共感指数）・FIRO-B（対人表出性）・
+        Rosenberg自己尊重感尺度・ECR（愛着スタイル）・BIS/BAS（行動活性化）</em>など
+        心理学・臨床研究で使用される尺度をもとに設計されています。<br><br>
+        「直近3ヶ月」の行動に絞った設問で<em>記憶バイアスを排除</em>し、
+        行動系・内面系で尺度を使い分けることで高い弁別力を実現しています。
+      </p>
+    </div>
+
+    <div class="badge-row">
+      <div class="badge-item"><div class="bi">🧠</div><div class="bl">心理学的根拠</div></div>
+      <div class="badge-item"><div class="bi">⏱️</div><div class="bl">直近3ヶ月軸</div></div>
+      <div class="badge-item"><div class="bi">🔄</div><div class="bl">逆転項目あり</div></div>
+      <div class="badge-item"><div class="bi">🤖</div><div class="bl">AI詳細分析</div></div>
+    </div>
+
+    <div class="scale-legend">
+      <div class="sl-title">回答形式について（質問タイプで使い分けています）</div>
+      <div style="margin-bottom:12px">
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:6px;">【行動頻度系】</div>
+        <div class="scale-grid">
+          <div class="scale-item"><div class="scale-num" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3)">1</div>まったくしない</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3)">2</div>ほとんどしない</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(245,200,66,0.15);color:var(--gold)">3</div>たまにする</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(245,200,66,0.2);color:var(--gold)">4</div>よくする</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(245,200,66,0.3);color:var(--gold)">5</div>ほぼ毎回する</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:6px;">【内面・感情系】</div>
+        <div class="scale-grid">
+          <div class="scale-item"><div class="scale-num" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3)">1</div>当てはまらない</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3)">2</div>あまり当てはまらない</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(245,200,66,0.15);color:var(--gold)">3</div>どちらとも言えない</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(245,200,66,0.2);color:var(--gold)">4</div>やや当てはまる</div>
+          <div class="scale-item"><div class="scale-num" style="background:rgba(245,200,66,0.3);color:var(--gold)">5</div>非常に当てはまる</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">診断を始める →</button>
+    <p style="font-size:11px;color:var(--text-faint);text-align:center;margin-top:14px;">
+      所要時間：約4〜6分 ／ 32問 ／ 個人情報は収集しません
+    </p>
+  </div>
+
+  <!-- ════ QUIZ ════ -->
+  <div id="quiz" class="section">
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span class="cat-badge" id="cat-label">A: 会話開始</span>
+        <span class="q-count" id="q-count">1 / 32</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="basis-label" id="basis-label">根拠: NEO-FFI 外向性</div>
+    </div>
+
+    <div class="q-card">
+      <p class="q-text" id="q-text">質問テキスト</p>
+    </div>
+
+    <div class="opts" id="opts"></div>
+
+    <button class="btn-primary" id="next-btn" onclick="nextQ()" disabled>
+      次へ →
+    </button>
+  </div>
+
+  <!-- ════ LOADING ════ -->
+  <div id="loading" class="section">
+    <div class="spinner"></div>
+    <p class="loading-text">AIが行動データを分析中...</p>
+    <p class="loading-sub">NEO-FFI / IRI / FIRO-B / ECR / BIS・BAS / Rosenberg SES</p>
+    <div class="score-preview" id="score-preview"></div>
+  </div>
+
+  <!-- ════ RESULT ════ -->
+  <div id="result" class="section">
+    <div class="rank-card" id="rank-card">
+      <div class="rank-glow" id="rank-glow"></div>
+      <div class="rank-label">TOTAL SCORE</div>
+      <div class="rank-score" id="rank-score">—</div>
+      <div class="rank-denom">/ 150点</div>
+      <div class="rank-type-badge" id="rank-type-badge">—</div>
+      <div class="rank-sub" id="rank-sub-type">—</div>
+      <div class="cat-bars" id="cat-bars"></div>
+    </div>
+
+    <div class="ai-report">
+      <div class="ai-report-title">✦ AI 詳細分析レポート</div>
+      <div class="ai-content" id="ai-content">分析中...</div>
+    </div>
+
+    <div class="scales-wrap">
+      <div class="scales-title">使用尺度</div>
+      <div class="scales-list">
+        <span class="scale-tag">NEO-FFI 外向性</span>
+        <span class="scale-tag">Big Five 協調性・開放性</span>
+        <span class="scale-tag">IRI 共感尺度</span>
+        <span class="scale-tag">FIRO-B 表出性</span>
+        <span class="scale-tag">ECR 愛着スタイル</span>
+        <span class="scale-tag">BIS/BAS 行動活性</span>
+        <span class="scale-tag">Rosenberg SES</span>
+        <span class="scale-tag">DERS 感情調節</span>
+        <span class="scale-tag">Social Desirability</span>
+      </div>
+    </div>
+
+    <button class="btn-ghost" onclick="retryQuiz()">もう一度診断する</button>
+  </div>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────
+// 設問データ（改善版 32問）
+// ─────────────────────────────────────────
+const QUESTIONS = [
+  // ── A: 会話開始・接触行動（NEO-FFI 外向性）行動頻度系 ──
+  {
+    id:1, cat:"A", catName:"A: 会話開始・接触行動", basis:"NEO-FFI 外向性",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、初対面の集まりで自分から隣の人に声をかけた",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:2, cat:"A", catName:"A: 会話開始・接触行動", basis:"NEO-FFI 外向性",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、会話が途切れたとき自分から新しい話題を出した",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:3, cat:"A", catName:"A: 会話開始・接触行動", basis:"NEO-FFI 外向性（逆転）",
+    type:"freq", reverse:true,
+    text:"複数人の場で沈黙になったとき、自分から動かずその空気に任せてしまう",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+
+  // ── B: 共感・傾聴能力（IRI・Big Five 協調性）内面系 ──
+  {
+    id:4, cat:"B", catName:"B: 共感・傾聴能力", basis:"IRI 視点取得",
+    type:"inner", reverse:false,
+    text:"相手が話しているとき、内容だけでなく感情の部分も同時に理解しようとする",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+  {
+    id:5, cat:"B", catName:"B: 共感・傾聴能力", basis:"IRI 共感的配慮",
+    type:"inner", reverse:false,
+    text:"相手が落ち込んでいたり困っていたりすると、自分もつられて気持ちが動く",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+  {
+    id:6, cat:"B", catName:"B: 共感・傾聴能力", basis:"Big Five 協調性（逆転）",
+    type:"freq", reverse:true,
+    text:"直近3ヶ月で、会話中に自分の話をしたいという気持ちが勝り、相手の話を最後まで聞けなかった",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:7, cat:"B", catName:"B: 共感・傾聴能力", basis:"Big Five 協調性",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、相手の話を「つまり〇〇ということですね」と言い換えて確認した",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+
+  // ── C: 非言語・空気適応（ECR・BIS/BAS）内面＋行動混合 ──
+  {
+    id:8, cat:"C", catName:"C: 非言語・空気適応", basis:"ECR 愛着回避（適応）",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、相手が静かな話し方をしていると自分もテンポや声量を自然に落とした",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:9, cat:"C", catName:"C: 非言語・空気適応", basis:"BIS 行動抑制（逆転）",
+    type:"freq", reverse:true,
+    text:"直近3ヶ月で、相手が興味なさそうな反応をしていても、その話題を引っ張り続けてしまった",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:10, cat:"C", catName:"C: 非言語・空気適応", basis:"NEO-FFI 社会的知覚",
+    type:"inner", reverse:false,
+    text:"初対面でも「この人はよく話すタイプか・聞くタイプか」を観察して話し方を変えられる",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+  {
+    id:11, cat:"C", catName:"C: 非言語・空気適応", basis:"BIS 行動抑制（逆転）",
+    type:"inner", reverse:true,
+    text:"会話が途切れたとき、不安になって無理に話を埋めようとしてしまう",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+
+  // ── D: 魅力提示・自己開示（Rosenberg SES・Big Five 開放性）──
+  {
+    id:12, cat:"D", catName:"D: 魅力提示・自己開示", basis:"Rosenberg SES",
+    type:"inner", reverse:false,
+    text:"自分の好きなことや最近ハマっていることを、自信を持って話せる",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+  {
+    id:13, cat:"D", catName:"D: 魅力提示・自己開示", basis:"Big Five 開放性",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、趣味・仕事・最近の体験について、具体的なエピソードを交えて話した",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:14, cat:"D", catName:"D: 魅力提示・自己開示", basis:"Rosenberg SES（逆転）",
+    type:"inner", reverse:true,
+    text:"自分の日常や過ごし方を話すとき、「特に何も…」と濁してしまいがちだ",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+
+  // ── E: リーダーシップ・関係進展（FIRO-B 表出性）行動頻度系 ──
+  {
+    id:15, cat:"E", catName:"E: リーダーシップ・進展", basis:"FIRO-B 表出的包含",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、気になる女性に自分からLINEやメッセージを送った",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:16, cat:"E", catName:"E: リーダーシップ・進展", basis:"FIRO-B 表出的統制",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、会話の中で「今度〇〇行きましょう」など次につながる提案を自分からした",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:17, cat:"E", catName:"E: リーダーシップ・進展", basis:"FIRO-B 表出的包含",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、別れ際に「また〇〇の話、聞かせてください」など次回につながる一言を入れた",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:18, cat:"E", catName:"E: リーダーシップ・進展", basis:"BAS 行動活性（逆転）",
+    type:"inner", reverse:true,
+    text:"相手からの反応を待ってしまい、自分から次のアクションを起こすのが苦手だ",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+  {
+    id:19, cat:"E", catName:"E: リーダーシップ・進展", basis:"ECR 拒絶耐性",
+    type:"inner", reverse:false,
+    text:"気になる女性に誘いを断られたあと、気持ちを切り替えて別の行動ができる",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+
+  // ── F: 外見・清潔感（行動指標）行動頻度系 ──
+  {
+    id:20, cat:"F", catName:"F: 外見・清潔感", basis:"外見管理行動指標",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、人に会う前に髪型・服装・靴・口臭を事前にチェックした",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:21, cat:"F", catName:"F: 外見・清潔感", basis:"外見管理行動指標",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、美容院・眉カット・スキンケアなど外見を整えるケアに月1回以上時間とお金を使った",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+  {
+    id:22, cat:"F", catName:"F: 外見・清潔感", basis:"外見管理行動指標",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月で、体型維持のために週1回以上の運動または食事管理をした",
+    opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]
+  },
+
+  // ── G: アウトカム指標（直近3ヶ月）行動頻度系 ──
+  {
+    id:23, cat:"G", catName:"G: アウトカム指標", basis:"アウトカム（接触結果）",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月以内に、初対面または会って間もない女性から連絡先を聞かれた",
+    opts:["0回","1回","2〜3回","4〜5回","6回以上"]
+  },
+  {
+    id:24, cat:"G", catName:"G: アウトカム指標", basis:"アウトカム（誘導結果）",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月以内に、自分から誘わなくても女性側から食事や会う提案をされた",
+    opts:["0回","1回","2〜3回","4〜5回","6回以上"]
+  },
+  {
+    id:25, cat:"G", catName:"G: アウトカム指標", basis:"アウトカム（継続結果）",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月以内に、女性との会話や食事のあとLINEやメッセージが自然に続いた",
+    opts:["0回","1回","2〜3回","4〜5回","6回以上"]
+  },
+  {
+    id:26, cat:"G", catName:"G: アウトカム指標", basis:"アウトカム（好意反応）",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月以内に、女性から「話しやすい」「面白い」「また会いたい」など好意的な言葉をもらった",
+    opts:["0回","1回","2〜3回","4〜5回","6回以上"]
+  },
+  {
+    id:27, cat:"G", catName:"G: アウトカム指標", basis:"アウトカム（複数回接触）",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月以内に、同じ女性と自然に複数回会う関係になった",
+    opts:["0回","1回","2〜3回","4〜5回","6回以上"]
+  },
+
+  // ── H: 自己評価バイアス補正（Social Desirability・Rosenberg SES）内面系 ──
+  {
+    id:28, cat:"H", catName:"H: 自己評価（バイアス補正）", basis:"Social Desirability",
+    type:"inner", reverse:false,
+    text:"自分はコミュニケーション能力が同世代の平均より高いと思う",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+  {
+    id:29, cat:"H", catName:"H: 自己評価（バイアス補正）", basis:"Social Desirability",
+    type:"inner", reverse:false,
+    text:"自分は同世代の男性の中ではモテる方だと思う",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+  {
+    id:30, cat:"H", catName:"H: 自己評価（バイアス補正）", basis:"DERS 感情調節",
+    type:"inner", reverse:false,
+    text:"デートや会話がうまくいかなかったとき、その日のうちに気持ちを整理して切り替えられる",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+
+  // ── I: 補足指標（外見評価・経済行動）──
+  {
+    id:31, cat:"I", catName:"I: 補足指標", basis:"外見アウトカム指標",
+    type:"freq", reverse:false,
+    text:"直近3ヶ月以内に、初対面または会って間もない人から「かっこいい」「雰囲気がいい」と言われた",
+    opts:["0回","1回","2〜3回","4〜5回","6回以上"]
+  },
+  {
+    id:32, cat:"I", catName:"I: 補足指標", basis:"経済行動指標",
+    type:"inner", reverse:false,
+    text:"食事・デート・体験などに使える自由な予算を月単位で確保できている",
+    opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]
+  },
+];
+
+// カテゴリ定義
+const CAT_DEF = {
+  A: { name:"会話開始・接触行動", max:20, qs:[1,2,3] },
+  B: { name:"共感・傾聴能力",     max:25, qs:[4,5,6,7] },
+  C: { name:"非言語・空気適応",   max:20, qs:[8,9,10,11] },
+  D: { name:"魅力提示・自己開示", max:15, qs:[12,13,14] },
+  E: { name:"リーダーシップ",     max:20, qs:[15,16,17,18,19] },
+  F: { name:"外見・清潔感",       max:10, qs:[20,21,22] },
+  G: { name:"アウトカム指標",     max:40, qs:[23,24,25,26,27] },
+  H: { name:"自己評価バイアス補正",max:null, qs:[28,29,30] },
+  I: { name:"補足指標",           max:null, qs:[31,32] },
+};
+
+// ─── State ───
+let current = 0;
+let answers = {};
+let selectedVal = null;
+
+// ─── スコア計算 ───
+function calcScores(ans) {
+  const raw = {};
+  QUESTIONS.forEach(q => {
+    const v = ans[q.id] ?? 3;
+    raw[q.id] = q.reverse ? (6 - v) : v;
+  });
+
+  const catScores = {};
+  Object.entries(CAT_DEF).forEach(([cat, def]) => {
+    const vals = def.qs.map(id => raw[id] ?? 3);
+    const avg = vals.reduce((a,b)=>a+b,0) / vals.length;
+    catScores[cat] = def.max
+      ? Math.round((avg/5)*def.max)
+      : Math.round((avg/5)*100);
+  });
+
+  const total = catScores.A + catScores.B + catScores.C +
+                catScores.D + catScores.E + catScores.F +
+                Math.round(catScores.G * 1.5);
+
+  return { catScores, total, raw };
+}
+
+// ─── 画面切替 ───
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  el.classList.add('active');
+  el.classList.remove('anim-fadeup','anim-scalein');
+  void el.offsetWidth;
+  el.classList.add('anim-fadeup');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── 設問描画 ───
+function renderQuestion() {
+  const q = QUESTIONS[current];
+  document.getElementById('cat-label').textContent = q.catName;
+  document.getElementById('q-count').textContent = `${current+1} / ${QUESTIONS.length}`;
+  document.getElementById('basis-label').textContent = `根拠: ${q.basis}`;
+  document.getElementById('q-text').textContent = `Q${q.id}. ${q.text}`;
+
+  const pct = Math.round((current/QUESTIONS.length)*100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  const opts = document.getElementById('opts');
+  opts.innerHTML = '';
+  q.opts.forEach((label, i) => {
+    const val = i + 1;
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn' + (selectedVal === val ? ' selected' : '');
+    btn.innerHTML = `<span class="opt-num">${val}</span>${label}`;
+    btn.onclick = () => selectOpt(val);
+    opts.appendChild(btn);
+  });
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.disabled = selectedVal === null;
+  nextBtn.textContent = current+1 === QUESTIONS.length ? '診断する ✨' : '次へ →';
+}
+
+function selectOpt(val) {
+  selectedVal = val;
+  document.querySelectorAll('.opt-btn').forEach((btn, i) => {
+    btn.classList.toggle('selected', i+1 === val);
+    btn.querySelector('.opt-num').style.background = i+1===val ? 'var(--gold)' : 'rgba(255,255,255,0.07)';
+    btn.querySelector('.opt-num').style.color = i+1===val ? '#000' : 'var(--text-dim)';
+  });
+  document.getElementById('next-btn').disabled = false;
+}
+
+function startQuiz() {
+  current = 0; answers = {}; selectedVal = null;
+  showSection('quiz');
+  renderQuestion();
+}
+
+function nextQ() {
+  if (selectedVal === null) return;
+  answers[QUESTIONS[current].id] = selectedVal;
+  selectedVal = null;
+  if (current + 1 < QUESTIONS.length) {
+    current++;
+    renderQuestion();
+  } else {
+    const scores = calcScores(answers);
+    showLoading(scores);
+    fetchAI(scores);
+  }
+}
+
+// ─── ローディング ───
+function showLoading(scores) {
+  showSection('loading');
+  const preview = document.getElementById('score-preview');
+  preview.innerHTML = '';
+  ['A','B','C','D','E','F','G'].forEach(cat => {
+    const def = CAT_DEF[cat];
+    const chip = document.createElement('div');
+    chip.className = 'score-chip';
+    chip.innerHTML = `<div class="sc-cat">${cat}</div><div class="sc-val">${scores.catScores[cat]}<span class="sc-max">/${def.max}</span></div>`;
+    preview.appendChild(chip);
+  });
+}
+
+// ─── AI 診断 ───
+const SYSTEM_PROMPT = `あなたは社会心理学・進化心理学・行動科学・非言語コミュニケーションの専門家であり、
+男性の恋愛市場における魅力（Mate Value）を行動データと結果データの両面から
+定量評価・改善提案できるアナリストです。
+
+【絶対ルール】
+・不確かな内容は「推測」と明記する
+・仮定・事実・推測を混同しない
+・自己評価バイアスが存在する前提で分析する
+・抽象論ではなく「状況×行動」で説明する
+・否定ではなく改善の可能性として表現する
+・スピリチュアル・占い・根拠のないラベリング禁止
+・「モテる/モテない」を人間的優劣として扱わない
+・行動意欲が湧く具体性を最優先にする
+
+【評価カテゴリ・配点（使用尺度）】
+A: 会話開始・接触行動（NEO-FFI外向性） 最大20点
+B: 共感・傾聴能力（IRI・Big Five協調性） 最大25点
+C: 非言語・空気適応（ECR愛着・BIS/BAS） 最大20点
+D: 魅力提示・自己開示（Rosenberg SES・開放性） 最大15点
+E: リーダーシップ・関係進展（FIRO-B表出性・ECR拒絶耐性） 最大20点
+F: 外見・清潔感（行動管理指標） 最大10点
+G: アウトカム指標（直近3ヶ月の実績） ×1.5倍 最大60点
+H: 自己評価バイアス補正（Social Desirability・DERS） 参考のみ
+I: 補足指標（外見評価・経済行動） 総評に反映
+
+合計スコア = A+B+C+D+E+F+(G×1.5)
+
+【タイプ分類】
+120点以上：自然誘発型（女性の反応が自然に起きている状態）
+90〜119点：セミ魅力型（反応は出始めているが安定していない）
+60〜89点 ：不均衡型（能力はあるが特定の欠如が結果を妨げている）
+59点以下 ：未起動型（魅力が機能する構造がまだ十分でない）
+
+【サブタイプ判定】
+A〜F高・G低 → 空回りタイプ
+B高・E低   → いい人止まりタイプ
+D低        → 魅力未伝達タイプ
+G高・E低   → 受け身魅力タイプ
+全体低     → 未起動タイプ
+
+【出力構造（必ずこの順番・全項目省略なし）】
+## ① 総合スコアと評価
+カテゴリ別スコア・タイプ・サブタイプ・一行総評を含む
+
+## ② 現状の言語化
+実際に起きていそうな恋愛シーンを具体的に描写する（数字の羅列にしない）
+
+## ③ 行動と結果の乖離分析
+行動量×結果量の組み合わせ、バイアス補正（H）を参照した考察
+
+## ④ 強み（1〜3項目）
+心理学的根拠（互恵性・ミラーリング・自己開示・安心感など）を添えて説明
+
+## ⑤ ボトルネック（1〜2項目に絞る）
+最も結果に影響している欠如を特定する
+
+## ⑥ 改善したらどう変わるか
+女性の具体的な行動変化（返信・再会・好意表明など）を描写する
+
+## ⑦ 行動レベルの改善策（3〜5項目）
+「状況＋行動」形式、今週からできること、動機づけ的説明禁止
+
+## ⑧ 恋愛戦略
+相性の良い女性のタイプと心理学的な理由
+
+## ⑨ 専門家コメント
+社会心理学・進化心理学・行動科学の視点からの総括
+
+## ⑩ 締め
+「これをやれば変われる」という手応えで締める
+
+【文体・トーン】
+・優しいが現実的、曖昧すぎず断定的すぎない
+・各項目300文字程度、日本語のみ
+・読んだあと行動したくなる文章
+・専門的だが難解でない`;
+
+async function fetchAI(scores) {
+  const qaSummary = QUESTIONS.map(q => {
+    const raw = answers[q.id] ?? 3;
+    const processed = q.reverse ? (6-raw) : raw;
+    const label = q.opts[raw-1] ?? raw;
+    return `Q${q.id}[${q.cat}・${q.basis}・${q.type}系${q.reverse?'・逆転':''}] ${q.text}\n  → 回答:${raw}「${label}」/ 処理済スコア:${processed}`;
+  }).join('\n');
+
+  const catDetail = Object.entries(CAT_DEF)
+    .map(([cat,def]) => `${cat}(${def.name}): ${scores.catScores[cat]}${def.max?`/${def.max}点`:'点(参考)'}`)
+    .join(' | ');
+
+  const userMsg = `【診断スコアデータ】
+合計スコア: ${scores.total}点（最大150点）
+カテゴリ別スコア: ${catDetail}
+
+【全回答詳細（直近3ヶ月ベース・逆転処理済）】
+${qaSummary}
+
+上記データをもとに出力構造①〜⑩を全て省略なく日本語で出力してください。`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 3500,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.map(b=>b.text||'').join('') || '分析結果を取得できませんでした。';
+    showResult(scores, text);
+  } catch(e) {
+    showResult(scores, '通信エラーが発生しました。もう一度お試しください。');
+  }
+}
+
+// ─── 結果描画 ───
+function showResult(scores, aiText) {
+  const total = scores.total;
+  let color, bg, typeName, subDesc;
+
+  if (total >= 120) {
+    color='#FFD700'; bg='#130e00';
+    typeName='自然誘発型'; subDesc='女性の反応が自然に起きている状態';
+  } else if (total >= 90) {
+    color='#7EC8FF'; bg='#001525';
+    typeName='セミ魅力型'; subDesc='反応は出始めているが、まだ安定していない';
+  } else if (total >= 60) {
+    color='#7AFFC0'; bg='#001510';
+    typeName='不均衡型'; subDesc='能力はあるが特定の欠如が結果を妨げている';
+  } else {
+    color='#FF9966'; bg='#150800';
+    typeName='未起動型'; subDesc='魅力が機能する構造がまだ十分でない';
+  }
+
+  // ランクカード
+  const card = document.getElementById('rank-card');
+  card.style.background = bg;
+  card.style.border = `1px solid ${color}25`;
+  document.getElementById('rank-glow').style.background = `radial-gradient(circle, ${color}18, transparent 70%)`;
+  document.getElementById('rank-score').textContent = total;
+  document.getElementById('rank-score').style.color = color;
+  document.getElementById('rank-score').style.textShadow = `0 0 48px ${color}60`;
+  const badge = document.getElementById('rank-type-badge');
+  badge.textContent = typeName;
+  badge.style.background = `${color}18`;
+  badge.style.color = color;
+  badge.style.border = `1px solid ${color}40`;
+  document.getElementById('rank-sub-type').textContent = subDesc;
+
+  // カテゴリバー
+  const bars = document.getElementById('cat-bars');
+  bars.innerHTML = '';
+  ['A','B','C','D','E','F','G'].forEach(cat => {
+    const def = CAT_DEF[cat];
+    const sc = scores.catScores[cat];
+    const pct = Math.round((sc/def.max)*100);
+    bars.innerHTML += `
+      <div class="cat-bar-row">
+        <div class="cat-bar-top">
+          <span class="cat-bar-name">${cat}: ${def.name}</span>
+          <span class="cat-bar-val" style="color:${color}">${sc}/${def.max}</span>
+        </div>
+        <div class="cat-bar-bg">
+          <div class="cat-bar-fill" style="width:${pct}%;background:linear-gradient(90deg,${color}88,${color})"></div>
+        </div>
+      </div>`;
+  });
+
+  // AI テキスト変換
+  const html = convertMarkdown(aiText, color);
+  document.getElementById('ai-content').innerHTML = html;
+
+  showSection('result');
+}
+
+function convertMarkdown(text, color) {
+  return text
+    .replace(/^## (.+)$/gm, `<h2 style="color:${color}">$1</h2>`)
+    .replace(/^### (.+)$/gm, `<h3 style="color:${color}cc">$1</h3>`)
+    .replace(/\*\*(.+?)\*\*/g, `<strong style="color:${color}">$1</strong>`)
+    .replace(/^[-・] (.+)$/gm, '<ul><li>$1</li></ul>')
+    .replace(/<\/ul>\n<ul>/g, '')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>')
+    .replace(/^(.)/gm, (m, p1) => p1 === '<' ? m : `<p>${m}`)
+    .replace(/([^>])$/gm, (m) => m.endsWith('>') ? m : `${m}</p>`);
+}
+
+function retryQuiz() {
+  current = 0; answers = {}; selectedVal = null;
+  showSection('intro');
+}
+</script>
+</body>
+</html>
