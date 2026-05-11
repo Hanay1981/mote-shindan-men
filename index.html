@@ -9,23 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#07070a;--surface:#101016;--surface2:#17171f;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --text:#dde0e8;--muted:#6a6e80;--faint:#2e3040;
-  --gold:#F0C040;--gold2:#C89010;--orange:#E86030;
-}
+:root{--bg:#07070a;--surface:#101016;--surface2:#17171f;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#dde0e8;--muted:#6a6e80;--faint:#2e3040;--gold:#F0C040;--gold2:#C89010;--orange:#E86030}
 html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
 .app{max-width:600px;margin:0 auto;padding:0 1.2rem 5rem;position:relative;z-index:1}
-
-/* アニメ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
 .fade-in{animation:fadeUp .45s cubic-bezier(.22,.68,0,1.15) forwards}
-
-/* TOP */
 .top{padding:3.5rem 0 2rem;text-align:center}
 .top-eyebrow{font-size:.68rem;letter-spacing:.22em;color:var(--muted);margin-bottom:1rem;text-transform:uppercase}
 .top h1{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1.3;margin-bottom:.4rem;color:#fff}
@@ -46,8 +36,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
 .legend-item{display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:rgba(255,255,255,.5)}
 .legend-num{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
-
-/* BUTTONS */
 .btn-start{width:100%;padding:1rem;font-size:1rem;font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.08em;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;cursor:pointer;transition:all .2s}
 .btn-start:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(240,192,64,.35)}
 .btn-next{width:100%;padding:.9rem;font-size:.95rem;font-family:'Noto Sans JP',sans-serif;font-weight:700;border-radius:10px;border:none;background:linear-gradient(135deg,var(--gold),var(--orange));color:#000;cursor:pointer;transition:all .2s;margin-top:.8rem;letter-spacing:.05em}
@@ -55,10 +43,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .btn-next:disabled{opacity:.25;cursor:not-allowed}
 .btn-retry{width:100%;margin-top:1.5rem;padding:.85rem;font-size:.9rem;font-family:'Noto Sans JP',sans-serif;border:.5px solid var(--border2);border-radius:10px;background:transparent;color:var(--text);cursor:pointer;transition:all .2s}
 .btn-retry:hover{background:var(--surface)}
-.back-btn{font-size:.78rem;color:var(--muted);cursor:pointer;margin-bottom:1.5rem;display:flex;align-items:center;gap:.4rem;background:none;border:none;font-family:'Noto Sans JP',sans-serif;padding:0}
-.back-btn:hover{color:var(--text)}
-
-/* QUIZ */
 .quiz-wrap{padding-top:2rem}
 .progress-wrap{margin-bottom:1.5rem}
 .progress-top{display:flex;justify-content:space-between;margin-bottom:.5rem}
@@ -75,8 +59,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .opt-btn.selected{border-color:var(--gold);color:var(--gold);background:rgba(240,192,64,.08)}
 .opt-num{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;background:rgba(255,255,255,.06);color:var(--muted);transition:all .15s}
 .opt-btn.selected .opt-num{background:var(--gold);color:#000}
-
-/* LOADING */
 .loading-screen{display:none;text-align:center;padding:5rem 0}
 .spinner{width:40px;height:40px;border:2px solid var(--faint);border-top-color:var(--gold);border-radius:50%;animation:spin .85s linear infinite;margin:0 auto 1.5rem}
 .loading-text{font-size:.85rem;color:var(--gold);letter-spacing:.1em}
@@ -85,8 +67,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .chip-cat{font-size:.68rem;color:var(--gold);font-weight:700}
 .chip-val{font-size:1rem;font-weight:700;color:#fff}
 .chip-max{font-size:.65rem;color:var(--muted)}
-
-/* RESULT */
 .result-wrap{padding-top:1.5rem}
 .rank-card{border-radius:20px;padding:2rem 1.5rem;text-align:center;margin-bottom:1.2rem;position:relative;overflow:hidden}
 .rank-glow{position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;pointer-events:none}
@@ -94,7 +74,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .rank-score{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:600;line-height:1}
 .rank-denom{font-size:.85rem;color:rgba(255,255,255,.28);margin:.3rem 0 .9rem}
 .rank-badge{display:inline-block;border-radius:24px;padding:4px 16px;font-size:.88rem;font-weight:600;letter-spacing:.06em;margin-bottom:.3rem}
-.rank-sub{font-size:.75rem;color:rgba(255,255,255,.3);margin-top:.4rem;letter-spacing:.04em}
+.rank-type{font-size:1.1rem;font-weight:700;color:#fff;margin:.6rem 0 .3rem;font-family:'Cormorant Garamond',serif}
+.rank-sub{font-size:.75rem;color:rgba(255,255,255,.35);letter-spacing:.04em}
 .cat-bars{margin-top:1.5rem;text-align:left}
 .bar-row{margin-bottom:.7rem}
 .bar-top{display:flex;justify-content:space-between;margin-bottom:.3rem}
@@ -102,8 +83,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .bar-val{font-size:.7rem;font-weight:700}
 .bar-bg{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
 .bar-fill{height:100%;border-radius:2px;transition:width 1s cubic-bezier(.4,0,.2,1)}
-
-/* RESULT SECTIONS */
 .result-section{margin-bottom:1.5rem}
 .section-label{font-size:.68rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:.5px solid var(--border);display:flex;align-items:center;gap:.5rem}
 .section-num{font-size:.6rem;color:rgba(255,255,255,.18)}
@@ -112,12 +91,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .rl-item{padding:.6rem 0 .6rem 1.1rem;border-bottom:.5px solid var(--border);font-size:.85rem;line-height:1.8;color:#9098a8;position:relative}
 .rl-item::before{content:'';position:absolute;left:0;top:.85rem;width:5px;height:5px;border-radius:50%}
 .rl-warn::before{background:var(--gold)}
-.rl-danger::before{background:#E05040}
 .rl-ok::before{background:#40C080}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-.col-box{background:rgba(255,255,255,.03);border:.5px solid var(--border);border-radius:8px;padding:.9rem}
-.col-box-label{font-size:.65rem;letter-spacing:.08em;margin-bottom:.5rem}
-.col-box-text{font-size:.82rem;line-height:1.85;color:#8898a8}
 .highlight-box{padding:.9rem 1.1rem;background:rgba(240,192,64,.05);border:.5px solid rgba(240,192,64,.2);border-radius:10px;font-size:.88rem;line-height:2;color:var(--text);border-left:2px solid var(--gold)}
 .action-box{background:rgba(255,255,255,.03);border:.5px solid var(--border2);border-radius:10px;padding:.9rem 1rem;margin-bottom:.5rem}
 .action-label{font-size:.65rem;letter-spacing:.08em;color:var(--gold);margin-bottom:.4rem}
@@ -130,37 +104,30 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .scales-footer-title{font-size:.65rem;color:var(--muted);letter-spacing:.12em;margin-bottom:.6rem}
 .scales-footer-tags{display:flex;flex-wrap:wrap;gap:.4rem}
 .sf-tag{font-size:.68rem;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.04);border:.5px solid var(--border);color:rgba(255,255,255,.25)}
-@media(max-width:480px){.two-col{grid-template-columns:1fr}.rank-score{font-size:4rem}}
+@media(max-width:480px){.rank-score{font-size:4rem}}
 </style>
 </head>
 <body>
 <div class="app">
-
-<!-- TOP -->
 <div id="topPage">
   <div class="top fade-in">
     <div class="top-eyebrow">Men's Attraction Analysis · Behavioral Science</div>
     <h1>モテ度 本格診断<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.4rem;color:rgba(255,255,255,.5)">Men's Edition</span></h1>
-    <div class="sub">32 QUESTIONS · PSYCHOLOGICAL SCALES · BEHAVIORAL SCIENCE</div>
+    <div class="sub">32 QUESTIONS · 20 RESULT PATTERNS · BEHAVIORAL SCIENCE</div>
   </div>
   <div class="intro-body fade-in">
     <p>モテは才能ではなく、<em>行動の構造</em>です。</p>
-    <div class="hook-line">この診断は<em>NEO-FFI（外向性）・IRI（共感指数）・FIRO-B（対人関係）・Rosenberg自己尊重感尺度・ECR（愛着スタイル）・BIS/BAS（行動活性化）</em>など心理学・臨床研究で使用される尺度をもとに設計されています。</div>
-    <p>「直近3ヶ月」の行動に絞ることで記憶バイアスを排除。行動系・内面系で尺度を使い分けた<em>逆転項目あり</em>の本格設計です。</p>
-    <p>スコアはA〜Gの7カテゴリで算出。あなたの「行動の強み」と「結果を妨げているボトルネック」を具体的に可視化します。</p>
+    <div class="hook-line">この診断は<em>NEO-FFI・IRI・FIRO-B・Rosenberg SES・ECR・BIS/BAS</em>など心理学・臨床研究で使用される尺度をもとに設計されています。「直近3ヶ月」の行動に絞り記憶バイアスを排除。<em>逆転項目あり</em>の本格設計です。</div>
+    <p>総合スコア×あなたの最大の弱点カテゴリの組み合わせで<em>20パターン</em>の診断結果を用意。「これはまさに自分だ」と感じられる精度を目指しています。</p>
   </div>
   <div class="warn-box">この診断は行動傾向の可視化を目的としたものです。結果は断定的な評価ではなく、傾向の分析と改善のヒントとしてご活用ください。</div>
   <div class="scale-box">
     <h4>使用している心理学的尺度</h4>
     <div class="scale-tags">
-      <span class="scale-tag">NEO-FFI 外向性</span>
-      <span class="scale-tag">IRI 共感尺度</span>
-      <span class="scale-tag">Big Five 協調性</span>
-      <span class="scale-tag">ECR 愛着スタイル</span>
-      <span class="scale-tag">FIRO-B 表出性</span>
-      <span class="scale-tag">BIS/BAS 行動活性</span>
-      <span class="scale-tag">Rosenberg SES</span>
-      <span class="scale-tag">Social Desirability</span>
+      <span class="scale-tag">NEO-FFI 外向性</span><span class="scale-tag">IRI 共感尺度</span>
+      <span class="scale-tag">Big Five 協調性・開放性</span><span class="scale-tag">ECR 愛着スタイル</span>
+      <span class="scale-tag">FIRO-B 表出性</span><span class="scale-tag">BIS/BAS 行動活性</span>
+      <span class="scale-tag">Rosenberg SES</span><span class="scale-tag">Social Desirability</span>
     </div>
   </div>
   <div class="scale-legend">
@@ -190,7 +157,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.9rem">所要時間：約4〜6分 ／ 32問 ／ 個人情報は収集しません</p>
 </div>
 
-<!-- QUIZ -->
 <div id="quizPage" style="display:none">
   <div class="quiz-wrap">
     <div class="progress-wrap">
@@ -207,55 +173,52 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
-<!-- LOADING -->
 <div class="loading-screen" id="loadingScreen">
   <div class="spinner"></div>
-  <p class="loading-text">スコアを集計中...</p>
+  <p class="loading-text">あなたのパターンを分析中...</p>
   <div class="score-chips" id="scoreChips"></div>
 </div>
 
-<!-- RESULT -->
 <div id="resultPage" style="display:none"></div>
+</div>
 
-</div><!-- /app -->
 <script>
-// ── 設問データ ──────────────────────────────
-const QS = [
-  {id:1,cat:"A",catName:"A: 会話開始・接触行動",basis:"NEO-FFI 外向性",type:"freq",rev:false,text:"直近3ヶ月で、初対面の集まりで自分から隣の人に声をかけた",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:2,cat:"A",catName:"A: 会話開始・接触行動",basis:"NEO-FFI 外向性",type:"freq",rev:false,text:"直近3ヶ月で、会話が途切れたとき自分から新しい話題を出した",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:3,cat:"A",catName:"A: 会話開始・接触行動",basis:"NEO-FFI 外向性（逆転）",type:"freq",rev:true,text:"複数人の場で沈黙になったとき、自分から動かずその空気に任せてしまう",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:4,cat:"B",catName:"B: 共感・傾聴能力",basis:"IRI 視点取得",type:"inner",rev:false,text:"相手が話しているとき、内容だけでなく感情の部分も同時に理解しようとする",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:5,cat:"B",catName:"B: 共感・傾聴能力",basis:"IRI 共感的配慮",type:"inner",rev:false,text:"相手が落ち込んでいたり困っていたりすると、自分もつられて気持ちが動く",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:6,cat:"B",catName:"B: 共感・傾聴能力",basis:"Big Five 協調性（逆転）",type:"freq",rev:true,text:"直近3ヶ月で、会話中に自分の話をしたいという気持ちが勝り、相手の話を最後まで聞けなかった",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:7,cat:"B",catName:"B: 共感・傾聴能力",basis:"Big Five 協調性",type:"freq",rev:false,text:"直近3ヶ月で、相手の話を「つまり〇〇ということですね」と言い換えて確認した",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:8,cat:"C",catName:"C: 非言語・空気適応",basis:"ECR 愛着回避（適応）",type:"freq",rev:false,text:"直近3ヶ月で、相手が静かな話し方をしていると自分もテンポや声量を自然に落とした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:9,cat:"C",catName:"C: 非言語・空気適応",basis:"BIS 行動抑制（逆転）",type:"freq",rev:true,text:"直近3ヶ月で、相手が興味なさそうな反応をしていても、その話題を引っ張り続けてしまった",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:10,cat:"C",catName:"C: 非言語・空気適応",basis:"NEO-FFI 社会的知覚",type:"inner",rev:false,text:"初対面でも「この人はよく話すタイプか・聞くタイプか」を観察して話し方を変えられる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:11,cat:"C",catName:"C: 非言語・空気適応",basis:"BIS 行動抑制（逆転）",type:"inner",rev:true,text:"会話が途切れたとき、不安になって無理に話を埋めようとしてしまう",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:12,cat:"D",catName:"D: 魅力提示・自己開示",basis:"Rosenberg SES",type:"inner",rev:false,text:"自分の好きなことや最近ハマっていることを、自信を持って話せる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:13,cat:"D",catName:"D: 魅力提示・自己開示",basis:"Big Five 開放性",type:"freq",rev:false,text:"直近3ヶ月で、趣味・仕事・最近の体験について、具体的なエピソードを交えて話した",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:14,cat:"D",catName:"D: 魅力提示・自己開示",basis:"Rosenberg SES（逆転）",type:"inner",rev:true,text:"自分の日常や過ごし方を話すとき、「特に何も…」と濁してしまいがちだ",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:15,cat:"E",catName:"E: リーダーシップ・進展",basis:"FIRO-B 表出的包含",type:"freq",rev:false,text:"直近3ヶ月で、気になる女性に自分からLINEやメッセージを送った",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:16,cat:"E",catName:"E: リーダーシップ・進展",basis:"FIRO-B 表出的統制",type:"freq",rev:false,text:"直近3ヶ月で、会話の中で「今度〇〇行きましょう」など次につながる提案を自分からした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:17,cat:"E",catName:"E: リーダーシップ・進展",basis:"FIRO-B 表出的包含",type:"freq",rev:false,text:"直近3ヶ月で、別れ際に「また〇〇の話聞かせてください」など次回につながる一言を入れた",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:18,cat:"E",catName:"E: リーダーシップ・進展",basis:"BAS 行動活性（逆転）",type:"inner",rev:true,text:"相手からの反応を待ってしまい、自分から次のアクションを起こすのが苦手だ",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:19,cat:"E",catName:"E: リーダーシップ・進展",basis:"ECR 拒絶耐性",type:"inner",rev:false,text:"気になる女性に誘いを断られたあと、気持ちを切り替えて別の行動ができる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:20,cat:"F",catName:"F: 外見・清潔感",basis:"外見管理行動指標",type:"freq",rev:false,text:"直近3ヶ月で、人に会う前に髪型・服装・靴・口臭を事前にチェックした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:21,cat:"F",catName:"F: 外見・清潔感",basis:"外見管理行動指標",type:"freq",rev:false,text:"直近3ヶ月で、美容院・眉カット・スキンケアなど外見を整えるケアに月1回以上時間とお金を使った",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:22,cat:"F",catName:"F: 外見・清潔感",basis:"外見管理行動指標",type:"freq",rev:false,text:"直近3ヶ月で、体型維持のために週1回以上の運動または食事管理をした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
-  {id:23,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（接触結果）",type:"freq",rev:false,text:"直近3ヶ月以内に、初対面または会って間もない女性から連絡先を聞かれた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
-  {id:24,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（誘導結果）",type:"freq",rev:false,text:"直近3ヶ月以内に、自分から誘わなくても女性側から食事や会う提案をされた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
-  {id:25,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（継続結果）",type:"freq",rev:false,text:"直近3ヶ月以内に、女性との会話や食事のあとLINEやメッセージが自然に続いた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
-  {id:26,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（好意反応）",type:"freq",rev:false,text:"直近3ヶ月以内に、女性から「話しやすい」「面白い」「また会いたい」など好意的な言葉をもらった",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
-  {id:27,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（複数回接触）",type:"freq",rev:false,text:"直近3ヶ月以内に、同じ女性と自然に複数回会う関係になった",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
-  {id:28,cat:"H",catName:"H: 自己評価（バイアス補正）",basis:"Social Desirability",type:"inner",rev:false,text:"自分はコミュニケーション能力が同世代の平均より高いと思う",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:29,cat:"H",catName:"H: 自己評価（バイアス補正）",basis:"Social Desirability",type:"inner",rev:false,text:"自分は同世代の男性の中ではモテる方だと思う",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:30,cat:"H",catName:"H: 自己評価（バイアス補正）",basis:"DERS 感情調節",type:"inner",rev:false,text:"デートや会話がうまくいかなかったとき、その日のうちに気持ちを整理して切り替えられる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
-  {id:31,cat:"I",catName:"I: 補足指標",basis:"外見アウトカム指標",type:"freq",rev:false,text:"直近3ヶ月以内に、初対面または会って間もない人から「かっこいい」「雰囲気がいい」と言われた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
-  {id:32,cat:"I",catName:"I: 補足指標",basis:"経済行動指標",type:"inner",rev:false,text:"食事・デート・体験などに使える自由な予算を月単位で確保できている",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]}
+const QS=[
+  {id:1,cat:"A",catName:"A: 会話開始・接触行動",basis:"NEO-FFI 外向性",rev:false,text:"直近3ヶ月で、初対面の集まりで自分から隣の人に声をかけた",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:2,cat:"A",catName:"A: 会話開始・接触行動",basis:"NEO-FFI 外向性",rev:false,text:"直近3ヶ月で、会話が途切れたとき自分から新しい話題を出した",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:3,cat:"A",catName:"A: 会話開始・接触行動",basis:"NEO-FFI 外向性（逆転）",rev:true,text:"複数人の場で沈黙になったとき、自分から動かずその空気に任せてしまう",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:4,cat:"B",catName:"B: 共感・傾聴能力",basis:"IRI 視点取得",rev:false,text:"相手が話しているとき、内容だけでなく感情の部分も同時に理解しようとする",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:5,cat:"B",catName:"B: 共感・傾聴能力",basis:"IRI 共感的配慮",rev:false,text:"相手が落ち込んでいたり困っていたりすると、自分もつられて気持ちが動く",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:6,cat:"B",catName:"B: 共感・傾聴能力",basis:"Big Five 協調性（逆転）",rev:true,text:"直近3ヶ月で、会話中に自分の話をしたいという気持ちが勝り、相手の話を最後まで聞けなかった",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:7,cat:"B",catName:"B: 共感・傾聴能力",basis:"Big Five 協調性",rev:false,text:"直近3ヶ月で、相手の話を「つまり〇〇ということですね」と言い換えて確認した",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:8,cat:"C",catName:"C: 非言語・空気適応",basis:"ECR 愛着回避（適応）",rev:false,text:"直近3ヶ月で、相手が静かな話し方をしていると自分もテンポや声量を自然に落とした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:9,cat:"C",catName:"C: 非言語・空気適応",basis:"BIS 行動抑制（逆転）",rev:true,text:"直近3ヶ月で、相手が興味なさそうな反応をしていても、その話題を引っ張り続けてしまった",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:10,cat:"C",catName:"C: 非言語・空気適応",basis:"NEO-FFI 社会的知覚",rev:false,text:"初対面でも「この人はよく話すタイプか・聞くタイプか」を観察して話し方を変えられる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:11,cat:"C",catName:"C: 非言語・空気適応",basis:"BIS 行動抑制（逆転）",rev:true,text:"会話が途切れたとき、不安になって無理に話を埋めようとしてしまう",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:12,cat:"D",catName:"D: 魅力提示・自己開示",basis:"Rosenberg SES",rev:false,text:"自分の好きなことや最近ハマっていることを、自信を持って話せる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:13,cat:"D",catName:"D: 魅力提示・自己開示",basis:"Big Five 開放性",rev:false,text:"直近3ヶ月で、趣味・仕事・最近の体験について、具体的なエピソードを交えて話した",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:14,cat:"D",catName:"D: 魅力提示・自己開示",basis:"Rosenberg SES（逆転）",rev:true,text:"自分の日常や過ごし方を話すとき、「特に何も…」と濁してしまいがちだ",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:15,cat:"E",catName:"E: リーダーシップ・進展",basis:"FIRO-B 表出的包含",rev:false,text:"直近3ヶ月で、気になる女性に自分からLINEやメッセージを送った",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:16,cat:"E",catName:"E: リーダーシップ・進展",basis:"FIRO-B 表出的統制",rev:false,text:"直近3ヶ月で、会話の中で「今度〇〇行きましょう」など次につながる提案を自分からした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:17,cat:"E",catName:"E: リーダーシップ・進展",basis:"FIRO-B 表出的包含",rev:false,text:"直近3ヶ月で、別れ際に「また〇〇の話聞かせてください」など次回につながる一言を入れた",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:18,cat:"E",catName:"E: リーダーシップ・進展",basis:"BAS 行動活性（逆転）",rev:true,text:"相手からの反応を待ってしまい、自分から次のアクションを起こすのが苦手だ",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:19,cat:"E",catName:"E: リーダーシップ・進展",basis:"ECR 拒絶耐性",rev:false,text:"気になる女性に誘いを断られたあと、気持ちを切り替えて別の行動ができる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:20,cat:"F",catName:"F: 外見・清潔感",basis:"外見管理行動指標",rev:false,text:"直近3ヶ月で、人に会う前に髪型・服装・靴・口臭を事前にチェックした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:21,cat:"F",catName:"F: 外見・清潔感",basis:"外見管理行動指標",rev:false,text:"直近3ヶ月で、美容院・眉カット・スキンケアなど外見を整えるケアに月1回以上時間とお金を使った",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:22,cat:"F",catName:"F: 外見・清潔感",basis:"外見管理行動指標",rev:false,text:"直近3ヶ月で、体型維持のために週1回以上の運動または食事管理をした",opts:["まったくしない","ほとんどしない","たまにする","よくする","ほぼ毎回する"]},
+  {id:23,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（接触結果）",rev:false,text:"直近3ヶ月以内に、初対面または会って間もない女性から連絡先を聞かれた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
+  {id:24,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（誘導結果）",rev:false,text:"直近3ヶ月以内に、自分から誘わなくても女性側から食事や会う提案をされた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
+  {id:25,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（継続結果）",rev:false,text:"直近3ヶ月以内に、女性との会話や食事のあとLINEやメッセージが自然に続いた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
+  {id:26,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（好意反応）",rev:false,text:"直近3ヶ月以内に、女性から「話しやすい」「面白い」「また会いたい」など好意的な言葉をもらった",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
+  {id:27,cat:"G",catName:"G: アウトカム指標",basis:"アウトカム（複数回接触）",rev:false,text:"直近3ヶ月以内に、同じ女性と自然に複数回会う関係になった",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
+  {id:28,cat:"H",catName:"H: 自己評価（バイアス補正）",basis:"Social Desirability",rev:false,text:"自分はコミュニケーション能力が同世代の平均より高いと思う",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:29,cat:"H",catName:"H: 自己評価（バイアス補正）",basis:"Social Desirability",rev:false,text:"自分は同世代の男性の中ではモテる方だと思う",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:30,cat:"H",catName:"H: 自己評価（バイアス補正）",basis:"DERS 感情調節",rev:false,text:"デートや会話がうまくいかなかったとき、その日のうちに気持ちを整理して切り替えられる",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]},
+  {id:31,cat:"I",catName:"I: 補足指標",basis:"外見アウトカム指標",rev:false,text:"直近3ヶ月以内に、初対面または会って間もない人から「かっこいい」「雰囲気がいい」と言われた",opts:["0回","1回","2〜3回","4〜5回","6回以上"]},
+  {id:32,cat:"I",catName:"I: 補足指標",basis:"経済行動指標",rev:false,text:"食事・デート・体験などに使える自由な予算を月単位で確保できている",opts:["当てはまらない","あまり当てはまらない","どちらとも言えない","やや当てはまる","非常に当てはまる"]}
 ];
 
-const CAT_DEF = {
+const CAT_DEF={
   A:{name:"会話開始・接触行動",max:20,qs:[1,2,3]},
   B:{name:"共感・傾聴能力",max:25,qs:[4,5,6,7]},
   C:{name:"非言語・空気適応",max:20,qs:[8,9,10,11]},
@@ -267,118 +230,325 @@ const CAT_DEF = {
   I:{name:"補足指標",max:null,qs:[31,32]}
 };
 
-// ── 診断結果データ ──────────────────────────
-const RESULTS = {
-  S: {
-    color:"#FFD700", bg:"#130e00",
+// ── 20パターン結果データ ──────────────────────────────
+// キー: "S_E" = 自然誘発型 × E最弱 など
+const RESULTS={
+
+  // ══ S：自然誘発型（120点以上） ══
+  S_E:{
+    tier:"S",color:"#FFD700",bg:"#130e00",
     typeName:"自然誘発型",
-    oneLiner:"女性の反応が自然に・繰り返し起きている状態",
-    desc:"回答から見えてきたのは、「女性からの反応が自然に起きていて、関係が自分から動かなくても続いていく」という状況です。行動の量だけでなく、その質と結果が高い水準で揃っています。意識的に頑張っているというよりも、行動パターンが習慣として定着している可能性が高いです。",
-    strengths:[
-      "会話の開始と維持が自然にできており、相手の心理的安全感を損なわないまま距離を縮められています。心理学的に「低コスト接触」の繰り返しが、相手の好意形成を促進しています。",
-      "非言語の適応力が高く、相手のペース・テンション・話し方に自然に合わせられています。ミラーリングが無意識に機能しており、「この人といると楽」という印象を与えやすい状態です。",
-      "リーダーシップ（進展行動）が機能しており、関係が次のステージへ進む際の「きっかけ」を自分から作れています。FIRO-B表出性の高さが実際のアウトカムに直結しています。"
-    ],
-    bottleneck:[
-      "現状の課題があるとすれば「再現性の安定化」です。結果は出ているが、それが特定の状況・相手に限定されている可能性があります。より幅広いタイプの女性にも同じ反応を引き出せるか、意識的に確認してみましょう。",
-      "自己評価バイアスの確認も重要です。スコアが高いほど「うまくいっている理由」を自分のスキルに帰属しやすくなります。結果が出ている場面とそうでない場面の違いを言語化する習慣が、さらなる精度向上につながります。"
-    ],
-    change:"現在の行動パターンを維持しながら、「なぜこの関係はうまくいったか」を言語化していくことで、再現性がさらに上がります。より多様なタイプの女性との関係構築が、次の課題になります。",
-    actions:[
-      "うまくいった会話・デートの直後に「何が効いたか」を一行だけメモする習慣をつける",
-      "反応が薄かった場面を振り返り、自分の行動のどこがズレていたかを特定する",
-      "普段アプローチしないタイプの女性に、月1回意識的に接触機会を作ってみる",
-      "別れ際の言葉を毎回変えてみて、どのパターンが最も反応が良いか観察する"
-    ],
-    strategy:"現在の強みは「安心感＋進展」のバランスです。より深い関係を求めるなら、自己開示の「深さ」を一段上げることで、女性側の感情的な投資が高まりやすくなります。",
-    expert:"進化心理学・社会心理学の観点から言えば、あなたの現状は「行動レパートリーの幅と質」が高い状態にあります。接触頻度・共感・進展行動の三要素が揃っており、これが安定した好意形成につながっています。次のフェーズは「深さ」の構築です。",
-    first_action:"今週、一人の女性に「あの話の続き聞かせてください」と具体的な話題を指定して連絡してみる",
-    redefine:"あなたが今いる状態は、多くの人が「もっとうまくやれれば」と思いながら辿り着けない場所です。\n\nただし、スコアが高いということは、同時に「見えにくい停滞」のリスクもあります。うまくいっているときほど、「なぜうまくいっているか」を言語化しない。その習慣が積み重なると、環境が変わったときに再現できなくなります。\n\n今の強みを「意識的に使えるスキル」に変換することが、次の成長です。あなたはすでに正しい場所にいます。あとは、その場所から見える景色を言語化するだけです。"
+    subType:"継続深化タイプ",
+    oneLiner:"反応は出ている。あとは『深さ』を加えるフェーズ",
+    scene:"女性から連絡が来て、デートも続いている。でも気づくと毎回同じような会話で終わっている。「また会いたい」とは言われるが、関係がなかなか次の段階に進まない感覚がある。",
+    strengths:["接触・共感・外見が揃っており、女性の反応が自然に起きている状態です。ほとんど意識しなくても好意を引き出せるレベルまで行動が習慣化されています。","G（アウトカム）スコアが高く、実際に女性から接触・継続・好意反応が得られています。これは行動の質が結果に直結していることを示しています。"],
+    bottleneck:["E（リーダーシップ・進展）が相対的に弱い点が、関係の深化を妨げている可能性があります。現状は「また会いたい」止まりで、関係が次のステージに進む『きっかけ』を自分から作れていない可能性があります。","「安心な関係」に居心地が良くなってしまい、意図的に関係を深める発言や行動を避けている可能性もあります（推測）。"],
+    change:"次の一手を意識的に出すことで、関係が深化するスピードが上がります。「また会いたい」から「もっと知りたい」への変化を引き出せるようになります。",
+    actions:["デートの終わりに「次は〇〇に行きませんか」と具体的な場所・日程を提案する","会話の中で自分の価値観や大切にしていることを一つ具体的に話す（自己開示の深化）","「また今度」を「来週の〇曜はどうですか」に変える","別れ際に「今日、〇〇の話が印象に残りました」と具体的な内容を伝える"],
+    first_action:"今週、会う約束をするとき「来週の〇曜、〇〇に行きませんか」と日付と場所を両方入れて提案する",
+    strategy:"現在の強みである安心感・共感を活かしながら、自己開示の深さを一段上げることが有効です。「この人のことをもっと知りたい」と思わせる自己開示が、関係を深化させる鍵です。",
+    expert:"社会心理学的に、関係の深化は「自己開示の互恵性」によって促進されます。あなたが少し深い自己開示をすることで、相手も同レベルの開示をするようになり、関係の親密度が上がります。",
+    redefine:"あなたはすでに多くの人が到達できない場所にいます。\n\n課題があるとすれば、それは「能力」ではなく「意図的な深化」です。うまくいっているからこそ、あえて現状を揺さぶる一手が必要です。今の関係に深さが加わったとき、あなたの恋愛は次の段階に入ります。"
   },
-  A: {
-    color:"#7EC8FF", bg:"#001828",
+  S_D:{
+    tier:"S",color:"#FFD700",bg:"#130e00",
+    typeName:"自然誘発型",
+    subType:"魅力再発信タイプ",
+    oneLiner:"接触・進展はできている。伝わっていないのは『中身』",
+    scene:"女性との関係は続くし、好意も感じる。でも「この人、何が好きなんだろう」「どんな人なんだろう」と思われている可能性がある。会話は楽しいが、印象が薄い。",
+    strengths:["行動量・共感力・リーダーシップが高水準で揃っており、女性が次に会いたいと思う状態が作れています。","G（アウトカム）が高く、実際の結果も出ています。関係の継続は問題なくできている状態です。"],
+    bottleneck:["D（魅力提示・自己開示）が弱い点が、関係の印象の強さを下げています。「話しやすい人」止まりで、「もっとこの人を知りたい」という好奇心を引き出せていない可能性があります。","自分の趣味・価値観・過ごし方を具体的なエピソードで話す頻度が低く、「何者かわからない」印象になっていることがあります。"],
+    change:"自己開示が増えることで、女性側の「もっと知りたい」という気持ちが高まります。単なる「楽しい人」から「気になる人」への変化が起きます。",
+    actions:["「先週〇〇に行きました」と固有名詞を使って最近の体験を話す習慣をつける","好きなものを話すとき「なぜ好きか」の理由まで一言添える","自分のこだわりや価値観を「実は〇〇なんですよね」と自己開示する場面を意識的に作る","相手の趣味を聞いたら、自分の関連する体験も合わせて話す"],
+    first_action:"今週、会話の中で「最近〇〇（固有名詞）にハマっています」と自分の具体的な体験を一つ話す",
+    strategy:"あなたの行動力・共感力を活かしながら、自己開示の具体性を上げることが次の課題です。「何を好きか」より「なぜ好きか」を伝えることで、あなたの人間としての深みが伝わります。",
+    expert:"自己開示は「深さ×具体性」で印象を決めます。抽象的な自己紹介よりも、「先週行ったあの店で〇〇を感じた」という具体的なエピソードの方が、記憶に残りやすく親近感を高めます。",
+    redefine:"あなたは行動も共感も揃っています。あと一つ加えるとしたら、それは『あなた自身の具体的な姿』です。\n\n会話が楽しいのに関係が深まらないとき、多くの場合「相手がもっと知りたいと思うものが見えていない」という状況です。今週、一つだけ具体的な自己開示を試みてください。それだけで相手の反応が変わります。"
+  },
+  S_C:{
+    tier:"S",color:"#FFD700",bg:"#130e00",
+    typeName:"自然誘発型",
+    subType:"場の精度向上タイプ",
+    oneLiner:"結果は出ている。場の読み方を洗練させると再現性が上がる",
+    scene:"モテている。でも時々、場の空気が読めずに会話が止まったり、テンションが噛み合わないことがある。「普段はいいのに、あのときは…」という場面が思い当たる。",
+    strengths:["全体スコアが高く、特に行動量・自己開示・リーダーシップが機能しています。女性の反応は安定的に得られています。","G（アウトカム）も高水準で、実際の結果が行動の質を証明しています。"],
+    bottleneck:["C（非言語・空気適応）が弱い点が、特定の場面での機会損失につながっています。相手のペース・テンション・興味の変化を読む精度が上がると、現在の成功率がさらに高まります。","「話が盛り上がったのに急に冷めた」という経験がある場合、相手の興味信号を見逃していた可能性があります。"],
+    change:"非言語適応が上がると、会話のテンポ・声量・話題転換のタイミングが最適化されます。現在の成功体験の再現性が高まり、より多様なタイプの女性に対応できるようになります。",
+    actions:["会話中、相手の返答が短くなったら話題を変えるシグナルと判断する練習をする","相手が静かな話し方をしたら、自分もテンポと声量を意識的に落とす","沈黙が来ても埋めずに2〜3秒待つ習慣をつける","「今、相手はどんな気分か」を30秒に一度意識する"],
+    first_action:"今週の会話で、相手の返答が一言になったタイミングで話題を変えることを一度意識して試みる",
+    strategy:"現在の強みに加え、相手のペースへの適応力が高まることで、より深い信頼関係が生まれやすくなります。特に、感受性の強い女性や内向的なタイプとの相性が向上します。",
+    expert:"ミラーリングと非言語的ペーシングは、相手の安心感を大幅に高めます。言語的な内容より、テンポ・声量・姿勢の合わせ方が「この人といると楽」という感覚を作ります。",
+    redefine:"あなたはすでに高いレベルにいます。次の精度向上は『場の読み方』です。\n\n非言語の適応は、意識すれば比較的短期間で改善できます。今週一つだけ、相手の反応を観察して話題を変えることを試してみてください。小さな変化が積み重なって、さらに安定した結果をもたらします。"
+  },
+  S_A:{
+    tier:"S",color:"#FFD700",bg:"#130e00",
+    typeName:"自然誘発型",
+    subType:"接触拡大タイプ",
+    oneLiner:"今いる範囲では機能している。接触を広げると結果がさらに増える",
+    scene:"知り合いやよく行く場所では自然にモテている。ただ、新しい場所や初対面の集まりになると急に緊張したり、声をかけるのが遅くなることがある。",
+    strengths:["共感・自己開示・リーダーシップが揃っており、既存の関係では高い成果が出ています。","G（アウトカム）が示すとおり、実際の女性の反応は良好です。今の環境では十分に機能しています。"],
+    bottleneck:["A（会話開始・接触行動）が弱い点が、新規接触の機会を狭めています。既存の場以外での接触開始に躊躇があり、新しい出会いのサンプル数が少ない状態です。","「知っている人の前では大丈夫だが、初対面になると急に動けなくなる」というパターンが当てはまる可能性があります。"],
+    change:"接触開始の行動が増えることで、現在の成功パターンを新しい環境でも再現できるようになります。出会いの総量が増え、結果の絶対数も増加します。",
+    actions:["今月、これまで行ったことのない集まり・イベントに一度参加する","初対面の場で、最初の30秒以内に隣の人に声をかける練習をする","「何から話せばいいかわからない」ときは「どこからいらっしゃいましたか」の一言で始める","参加前に「今日は3人に声をかける」という目標を一つ決めておく"],
+    first_action:"今月中に、普段と異なる場所での集まりやイベントに一つ参加の予定を入れる",
+    strategy:"現在の強みを新しい環境で活かすために、「最初の一言」を定型化することが有効です。内容より「話しかけた」という事実が重要で、その後は今の強みが機能します。",
+    expert:"社会心理学的に、初対面の接触開始は「習慣化」によってコストが下がります。最初の一言の型を決めておくことで、認知的負荷が減り行動しやすくなります。",
+    redefine:"あなたの強みは、すでに証明されています。問題は能力ではなく、その強みを発揮する『場の数』です。\n\n新しい環境での最初の一言だけ練習すれば、あとは今の自分が動きます。今週、一つだけ新しい場に出てみてください。"
+  },
+  S_F:{
+    tier:"S",color:"#FFD700",bg:"#130e00",
+    typeName:"自然誘発型",
+    subType:"印象安定タイプ",
+    oneLiner:"内面の行動は揃っている。外見管理を習慣化すると印象が安定する",
+    scene:"話していると好かれる。でも、第一印象が弱かったり、「久しぶりに会ったら少し残念だった」という経験がある。会話で取り返せるが、最初の評価でもったいない損をしている。",
+    strengths:["A〜Eが高水準で揃っており、特に会話・共感・進展行動が機能しています。内面的な行動の質は高いレベルにあります。","G（アウトカム）が高く、関係を築く能力は証明されています。"],
+    bottleneck:["F（外見・清潔感）が弱い点が、第一印象での評価を下げています。会話で挽回できているが、最初から好印象を持ってもらえれば同じ行動でより高い結果が出ます。","外見管理が習慣化されていないため、「会うたびに印象が変わる」状態になっている可能性があります。"],
+    change:"外見管理が習慣化されると、第一印象から高評価を得られるようになります。現在の会話力・共感力と組み合わさることで、トータルの印象が大幅に向上します。",
+    actions:["今月中に美容院・眉カット・スキンケアのいずれか一つを新たに始める","人に会う30分前に「髪・服・靴・口臭」の4点を必ず確認するルールを作る","週1回の運動または食事管理をカレンダーに固定する","月1回の美容院を定期予約にする"],
+    first_action:"今週中に美容院の予約を入れる（または眉カット・スキンケアを始める）",
+    strategy:"あなたの内面的な強みを最大限活かすために、外見という『入口』を整えることが有効です。第一印象が良くなることで、会話の前から有利な状態でスタートできます。",
+    expert:"進化心理学的に、外見は関係開始の『シグナル』として機能します。内面が充実していても、外見の第一印象が低いと会話のスタートラインが下がります。管理された外見は、相手の無意識の評価を高めます。",
+    redefine:"あなたの強みは本物です。あとは、その強みを最大限発揮できる『入口』を整えるだけです。\n\n外見管理は才能ではなく習慣です。今週一つだけ始めれば、来月には別人のような第一印象になります。内面はすでに揃っている。あとは外見という入口を開けるだけです。"
+  },
+
+  // ══ A：セミ魅力型（90〜119点） ══
+  A_E:{
+    tier:"A",color:"#7EC8FF",bg:"#001828",
     typeName:"セミ魅力型",
-    oneLiner:"女性の反応は出始めているが、まだ安定していない",
-    desc:"回答から見えてきたのは、「女性からの反応はある程度起きているが、継続や次のステップへの発展が不安定」という状況です。行動は取れているが、その行動が女性の継続的な反応につながっていない部分があります。あと一つの改善で、反応の質が大きく変わる可能性があります。",
-    strengths:[
-      "会話の開始・継続は一定レベルで機能しています。「話しかけられる存在」としての土台は作れており、初対面での接触コストは低い状態です。",
-      "共感・傾聴の基本は備わっています。相手の話を聞く姿勢があり、「話しやすい」という印象は与えられている可能性が高いです。"
-    ],
-    bottleneck:[
-      "最も多いパターンは「いい人止まり」です。B（共感）は高いがE（リーダーシップ）が低い場合、会話は快適でも関係が前進しない。別れ際に次につながる一言がない、LINEを送るタイミングが遅い、誘いの言葉がない——これらのどれかが欠けている可能性があります。",
-      "D（魅力提示）が弱い場合、「何者かわからない人」になっています。会話はできるが、自分の具体的な姿（趣味・価値観・過ごし方）が伝わっていないため、女性側が「もっと知りたい」という気持ちになりにくい状態です。"
-    ],
-    change:"リーダーシップを一段上げると、女性からのLINE返信が続くようになり、2回目のデート設定が格段に楽になります。別れ際の一言が変わるだけで、関係の続きやすさが変わります。",
-    actions:[
-      "別れ際に必ず「また〇〇の話、聞かせてください」と具体的な話題を指定して次回につなげる",
-      "会った翌日以内に「今日楽しかったです＋短い質問」の形でLINEを送る",
-      "自分の週末の過ごし方を「先週〇〇に行きました」という具体的な固有名詞で話せるようにする",
-      "誘うときは「どこか行きませんか」ではなく「〇〇（具体的な場所）に行きませんか」と言う"
-    ],
-    strategy:"あなたに合うのは、じっくり距離を縮めるタイプの女性です。最初から積極的な女性よりも、関係が深まるにつれて本音を見せてくれる内向的〜中間タイプの女性と相性が良い傾向があります。",
-    expert:"行動科学的に見ると、あなたは「接触→共感」の前半プロセスは機能していますが、「提案→進展」の後半が弱い状態です。恋愛関係の形成には、安心感だけでなく「方向性の提示」が必要です。進展行動は習慣であり、練習で変えられます。",
-    first_action:"今週、誰かに連絡するとき「楽しかった＋次につながる一言」をセットで送ってみる",
-    redefine:"あなたはすでに「好かれる素地」を持っています。問題は能力ではなく、「次の一手を出せていないこと」です。\n\n多くの人が「いい感じだったのに続かなかった」という経験をします。その原因のほとんどは、どちらも次の一手を出さなかったことです。恋愛において、安心感は必要条件ですが十分条件ではありません。安心感の上に「また会いたい」という理由が加わったとき、関係は前に進みます。\n\nあなたが変えるべきは、大きなことではありません。別れ際の一言、翌日のLINE、次の提案——この三つのどれか一つを今週変えるだけで、反応は変わり始めます。"
+    subType:"いい人止まりタイプ",
+    oneLiner:"会話は盛り上がる。でも次の約束が生まれない",
+    scene:"飲み会や合コンでは盛り上がる。LINEも続く。でも「また今度ね」と言いながら、その今度がなかなか来ない。気づくと自然消滅している。「あの子と仲良くなったのに」という経験が繰り返される。",
+    strengths:["会話の開始・維持は機能しており、女性から「話しやすい」という印象は与えられています。B（共感・傾聴）が機能しており、一緒にいて快適な存在として認識されています。","G（アウトカム）に一定の反応があり、「また会いたい」という反応まではつながっている状態です。"],
+    bottleneck:["E（リーダーシップ・進展）が最大の弱点です。会話は楽しいのに、別れ際に次につながる提案がない。LINEを送るタイミングが遅い。誘いの言葉が出ない。このどれかが欠けています。","FIRO-B表出性が低い状態で、「この人は私に興味があるのか」という確信を相手が持てないまま関係が終わっています。女性側からすると「嫌いじゃないけど積極的じゃないから待つのも疲れた」という状況です。"],
+    change:"別れ際の一言と翌日のLINEが変わるだけで、2回目の約束が生まれる頻度が大幅に上がります。「いい人」から「気になる人」への転換は、小さな行動一つで起きます。",
+    actions:["別れ際に必ず「また〇〇の話、聞かせてください」と具体的な話題を指定して次回につなげる","会った翌日以内に「今日楽しかったです＋短い質問」の形でLINEを送る","誘うときは「どこか行きませんか」ではなく「〇〇（具体的な場所）に来週どうですか」と言う","「また今度」という言葉を自分の口から言わないルールを作る"],
+    first_action:"今週、誰かと別れるときに「次は〇〇の話をもっと聞かせてください」と具体的な話題を指定して別れる",
+    strategy:"あなたに合うのは、じっくり距離を縮めるタイプの女性です。最初から積極的な女性よりも、関係が深まるにつれて本音を見せてくれるタイプとの相性が良い。ただし、あなたが次の一手を出さないと、どのタイプの女性との関係も進みません。",
+    expert:"行動科学的に、関係の進展は「接触→好意形成→進展行動」の三段階で進みます。あなたは最初の二段階は完了している。欠けているのは三段階目の『進展行動』だけです。これは習慣で変えられます。",
+    redefine:"あなたはすでに「好かれる状態」を作れています。問題は能力ではなく、次の一手を出していないことです。\n\n多くの「いい人止まり」の男性が、実はこの一点だけを変えれば関係が動き出します。別れ際の一言。翌日のLINE。この二つだけ変えれば、来月の状況は変わっています。"
   },
-  B: {
-    color:"#7AFFC0", bg:"#001510",
+  A_D:{
+    tier:"A",color:"#7EC8FF",bg:"#001828",
+    typeName:"セミ魅力型",
+    subType:"魅力未伝達タイプ",
+    oneLiner:"会話できる。でも『何者か』が伝わっていない",
+    scene:"会話は問題なくできる。でも後から「あの人、何の仕事してたっけ」「趣味とか全然知らないな」と思われている可能性がある。印象に残らない。「悪くない人」止まりになっている。",
+    strengths:["A（会話開始）やE（リーダーシップ）はある程度機能しており、接触や進展行動は取れています。「話しかけられる存在」としての土台は作れています。","G（アウトカム）に一定の反応があり、関係が続く土台はあります。"],
+    bottleneck:["D（魅力提示・自己開示）が最大の弱点です。会話はできているが、自分の具体的な姿（趣味・価値観・過ごし方）が伝わっていないため、女性側が「もっと知りたい」という気持ちになりにくい状態です。","「特に何も…」「普通ですよ」という答え方が多く、Rosenberg SESの低さが自己呈示の薄さに直結しています。"],
+    change:"具体的な自己開示が増えることで、女性側の「この人のことをもっと知りたい」という好奇心が高まります。「悪くない人」から「気になる人」への変化が起きます。",
+    actions:["自分の週末の過ごし方を「先週〇〇に行きました」という固有名詞で話せるようにする","「趣味は？」と聞かれたとき、「〇〇です。最近は特に△△にハマっていて…」と深掘りして答える","仕事の話をするとき「〇〇の仕事で、最近こんなことがあって…」とエピソードを一つ添える","「好きな食べ物は？」などの質問に「なぜ好きか」まで答える習慣をつける"],
+    first_action:"今週、誰かと話すときに「最近〇〇（固有名詞）が面白くて」と自分の具体的な興味を一つ話す",
+    strategy:"自己開示の具体性が高まることで、相手の記憶に残りやすくなります。特に、共通の話題や価値観を持つ女性からの反応が増えます。「何者かわからない人」から「あんなことが好きな人」に変わることで、相手からの接触が増えます。",
+    expert:"自己開示の返報性という心理原則により、あなたが具体的な自己開示をすると、相手も同レベルの開示をするようになります。これが親密感の形成を促進します。具体性が高いほど記憶に残り、好意形成につながります。",
+    redefine:"あなたは会話ができる。進展行動も取れる。あと一つ加えるだけで状況が変わります。それは『あなた自身の具体的な姿を見せること』です。\n\n「特に何も」と言うたびに、相手の中の『あなた』という存在が薄くなっています。今週、一つだけ具体的なことを話してみてください。それだけで印象が変わります。"
+  },
+  A_C:{
+    tier:"A",color:"#7EC8FF",bg:"#001828",
+    typeName:"セミ魅力型",
+    subType:"空気読み損ないタイプ",
+    oneLiner:"会話は悪くない。でも場の温度差を拾えていない",
+    scene:"話しかけるし、会話も続く。でも時々「あ、この話題、興味なかったんだな」と後から気づく。盛り上がっていると思ったら急に相手が引いていた。場の空気を読むのが少し遅い。",
+    strengths:["A（会話開始）とE（進展行動）はある程度機能しており、接触の量と動く意欲は持っています。行動を取ること自体はできています。","D（自己開示）が機能していれば、会話の内容自体は問題ない可能性があります。"],
+    bottleneck:["C（非言語・空気適応）が最大の弱点です。相手の反応（返答の長さ・表情・テンション）を読んで話題を切り替えるタイミングが遅く、「この人、空気読めないな」という印象を与えている可能性があります。","BIS（行動抑制）の機能が弱く、相手が興味を失ったサインを見逃して同じ話題を続けてしまうパターンがあります。"],
+    change:"場の読み方が上がると、会話の快適度が大幅に向上します。「話しやすい」から「この人といると居心地がいい」への変化が起きます。女性からの継続的な反応が増えます。",
+    actions:["会話中、相手の返答が短くなったら「話題を変えるサイン」と判断して別の話題に移る","相手が静かな話し方をしたら、自分もテンポと声量を意識的に落とす","沈黙が来ても2〜3秒は埋めずに待つ習慣をつける","「今、相手はこの話題に興味があるか」を会話の中で定期的に意識する"],
+    first_action:"今週の会話で、相手の返答が短くなったタイミングで意識的に話題を変えることを一度試みる",
+    strategy:"非言語の適応力が上がることで、感受性の強い女性・内向的なタイプとの相性が向上します。「この人は自分のペースに合わせてくれる」という感覚が、安心感と好意につながります。",
+    expert:"ミラーリングと非言語的ペーシングは、相手の安心感を高める強力な手法です。言語の内容よりも、テンポ・声量・話題切り替えのタイミングが「この人といると楽」という感覚を決定します。",
+    redefine:"あなたは行動できている。話しかけられている。あとは『場の温度』を拾う精度を上げるだけです。\n\n相手の返答が短くなったら話題を変える。これだけを今週意識してください。小さな変化ですが、相手の受け取り方が大きく変わります。"
+  },
+  A_A:{
+    tier:"A",color:"#7EC8FF",bg:"#001828",
+    typeName:"セミ魅力型",
+    subType:"機会創出不足タイプ",
+    oneLiner:"内面は揃っている。接触の絶対数が少ない",
+    scene:"知り合いの女性との関係は悪くない。でも出会いそのものが少ない。マッチングアプリは使っているが続かない。友人の紹介も少ない。「いつか縁があれば」と思いながら、その縁がなかなか来ない。",
+    strengths:["B・D・E が機能しており、関係が始まれば継続できる能力は持っています。問題は能力ではなく、その能力を発揮する機会の数です。","G（アウトカム）に一定の反応があり、接触した相手からの反応は悪くない状態です。"],
+    bottleneck:["A（会話開始・接触行動）が弱い点が、新規接触の機会を狭めています。初対面の場での接触開始に躊躇があり、新しい出会いのサンプル数が絶対的に少ない状態です。","「機会があれば動ける」が「機会を自分で作る」になっていない。待ちの姿勢が、接触量を制限しています。"],
+    change:"接触の機会が増えることで、現在の強みが活きる場面が増えます。出会いの絶対数が増えることで、現在うまくいっている関係パターンの再現頻度が上がります。",
+    actions:["今月、これまで参加したことのない集まり・趣味の場・イベントに一つ参加する","初対面の場で最初の30秒以内に隣の人に声をかける練習をする","マッチングアプリを使っている場合、毎日最低3人にメッセージを送るルールを作る","友人に「紹介してほしい」と具体的に伝えてみる（言わないと動いてくれない）"],
+    first_action:"今週中に、新しい集まりやイベントの予定を一つカレンダーに入れる",
+    strategy:"接触量を増やすことで、現在の成功パターンを再現できる機会が増えます。「縁を待つ」から「縁を作る」へのシフトが、今のあなたに最も必要な変化です。",
+    expert:"行動科学的に、恋愛における成功確率は接触数に比例します。現在の成功率を維持しながら接触数を増やすことで、結果の絶対数は増加します。機会の創出は、最もコスパの高い改善策です。",
+    redefine:"あなたの強みは本物です。問題は能力ではなく、その能力を発揮する場の数です。\n\n「縁があれば」と思っているとき、縁は自分で作るものです。今週、一つだけ新しい場に出てみてください。あとは今の自分が動きます。"
+  },
+  A_F:{
+    tier:"A",color:"#7EC8FF",bg:"#001828",
+    typeName:"セミ魅力型",
+    subType:"印象ロスタイプ",
+    oneLiner:"会話が始まれば問題ない。始まる前に評価を落としている",
+    scene:"話してみると「意外といい人だった」と言われることがある。逆に言えば、第一印象で「意外と」と思われている。外見で損をしていて、会話でようやく挽回している状態。",
+    strengths:["会話開始・共感・リーダーシップはある程度機能しており、関係が始まれば継続できる能力は持っています。","G（アウトカム）に一定の反応があり、接触した相手からの反応は悪くない状態です。"],
+    bottleneck:["F（外見・清潔感）が弱い点が、第一印象での評価を下げています。「話してみると良い人」という評価は、裏を返せば「見た目の印象が先行していた」ということです。","外見管理の習慣が薄く、「会うたびに印象が違う」状態になっている可能性があります。継続的なケアが必要です。"],
+    change:"外見管理が習慣化されると、会話が始まる前から高評価を得られるようになります。現在の会話力・進展行動と組み合わさることで、トータルの印象が大幅に向上します。",
+    actions:["今月中に美容院・眉カット・スキンケアのいずれか一つを新たに習慣化する","人に会う30分前に「髪・服・靴・口臭」の4点を必ず確認するルールを作る","服装を選ぶとき「清潔感があるか」を基準に選ぶ習慣をつける","月1回の美容院を定期予約にする"],
+    first_action:"今週中に美容院の予約を入れる。または明日からの毎朝の鏡チェック（髪・服・靴）を始める",
+    strategy:"外見という入口を整えることで、現在の強みが最初から活きるようになります。「意外といい人」から「最初からいい人」への変化は、外見管理だけで起きます。",
+    expert:"進化心理学的に、外見は関係開始のシグナルとして機能し、会話が始まる前の評価を決めます。清潔感・整った外見は、相手の無意識の好感度を上げ、会話へのハードルを下げます。",
+    redefine:"あなたは会話が始まれば機能します。問題は、会話が始まる前の評価です。\n\n外見管理は才能ではなく習慣です。今週一つだけ始めれば、来月の第一印象は変わります。今の内面の強みに、外見という入口を加えてください。"
+  },
+
+  // ══ B：不均衡型（60〜89点） ══
+  B_E:{
+    tier:"B",color:"#7AFFC0",bg:"#001510",
     typeName:"不均衡型",
-    oneLiner:"能力はあるが、特定の欠如が結果を妨げている",
-    desc:"回答から見えてきたのは、「特定のカテゴリは高いのに、一つの弱点が全体の結果を引き下げている」という状況です。全体的に低いのではなく、ある部分の欠如が「ボトルネック」になっています。原因が特定されれば、改善の効果は大きく出やすい状態です。",
-    strengths:[
-      "何らかの強みカテゴリが存在しています。その強みが機能している場面では、女性の反応が引き出せている可能性があります。",
-      "行動量は一定程度確保されており、「機会がない」という問題より「質のズレ」が主な課題です。"
-    ],
-    bottleneck:[
-      "外見・清潔感（F）が低い場合、会話の前段階で評価が下がっています。第一印象は会話が始まる前に決まります。髪・服・靴・口臭の4点を整えるだけで、同じ会話でも受け取られ方が変わります。",
-      "リーダーシップ（E）が低い場合、女性が「この人は私に興味があるのか」という確信を持てないまま関係が終わっています。自分から誘う、次を提案する、この二点だけでアウトカムが変わります。"
-    ],
-    change:"ボトルネックが一つ改善されると、他のカテゴリの強みが活きるようになります。弱点を補強することで、現在の強みが初めて機能し始める——という構造的な改善が期待できます。",
-    actions:[
-      "今月中に美容院・眉・スキンケアのいずれか一つを新たに始める",
-      "人に会う30分前に、髪・服・靴・口臭の4点を必ず確認する習慣をつける",
-      "次に誰かと会ったとき、別れ際に必ず「次はいつ会えますか」と一言添える",
-      "自分の強みカテゴリを意識的に「前に出す」場面を増やす（得意な話題・場面に誘導する）"
-    ],
-    strategy:"弱点カテゴリを補強しながら、強みを活かせる場面を意識的に選ぶことが有効です。例えばC（非言語）が強ければ、静かな2人の時間が取れる場所でのデートを選ぶ、D（自己開示）が強ければ共通の話題がある場に積極的に参加するなど。",
-    expert:"心理学的に「最も弱いリンクが全体のパフォーマンスを決める」という構造は、恋愛においても同様です。あなたの場合、強みは存在しており、それを活かすための「最後のピース」が欠けている状態です。その一つを埋めることで、全体の機能が変わります。",
-    first_action:"今週、自分の外見に関することで「一つだけ」具体的な改善行動をとる（美容院の予約・スキンケア開始など）",
-    redefine:"あなたが結果を出せていないのは、能力が低いからではありません。構造のズレです。\n\n自転車のタイヤが一つパンクしていたら、どれだけペダルを漕いでも進みにくい。それと同じです。強みは存在している。使えていないのは、一つの欠如がブロックしているからです。\n\n何を直すべきかは、スコアを見れば明確です。大きな変革は必要ありません。一つのボトルネックを修正するだけで、今まで機能しなかった強みが動き始めます。あなたはすでに十分なものを持っています。あとは、一つだけ直せばいい。"
+    subType:"接触後停滞タイプ",
+    oneLiner:"接触できる。でも関係を前に進める行動が出ない",
+    scene:"飲み会でLINEを交換する。でも自分からは連絡しない。相手からも来ない。「連絡先は知っているのに何もできていない人」が増えていく。「なんであのとき連絡しなかったんだろう」が積み重なっている。",
+    strengths:["A（会話開始）かB（共感）のどちらかが機能しており、接触の機会は作れています。「話しかける」「話を聞く」という基礎行動は取れています。","G（アウトカム）に一定の反応があり、女性からの印象は悪くない状態です。"],
+    bottleneck:["E（リーダーシップ・進展）が最大の弱点です。接触はできているが、その後の進展行動が取れていない。LINEを送らない、誘わない、次を提案しない——この不作為が関係を止めています。","「断られたらどうしよう」という恐れ（ECR拒絶耐性の低さ）が、行動を妨げている可能性があります。"],
+    change:"進展行動が一つ増えるだけで、関係の継続率が大幅に上がります。「連絡先を知っているだけの人」から「また会っている人」への転換が起きます。",
+    actions:["LINE交換をした翌日以内に必ず「今日楽しかったです＋一つの質問」を送る","「また今度」と言いそうになったら「来週の〇曜はどうですか」に言い換える","断られても「そうか、また誘います」の一言で終わらせる練習をする","今週中に、連絡していない女性一人に短いメッセージを送る"],
+    first_action:"今日または明日、連絡できていない女性一人に「先日はありがとうございました。〇〇の話が面白かったです」と送る",
+    strategy:"まず行動の量を増やすことが優先です。進展行動の質より量を先に確保し、慣れることで自然に質も上がります。断られることへの慣れも、行動の繰り返しで生まれます。",
+    expert:"行動科学的に、「行動しない理由」は多くの場合リスク回避（断られる恐れ）です。ただし、行動しないことのリスク（機会損失）の方が統計的に大きいことが示されています。まず行動量を増やすことが先決です。",
+    redefine:"あなたは接触できています。あと一歩だけ踏み出すことで、今の状況は変わります。\n\n「連絡しようかどうか迷っている」とき、その迷いが生んでいるのは現状維持だけです。送った場合の最悪は「既読スルー」。送らない場合の確実な結果は「何も起きない」。今日、一つだけ送ってみてください。"
   },
-  C: {
-    color:"#FF9966", bg:"#150800",
+  B_D:{
+    tier:"B",color:"#7AFFC0",bg:"#001510",
+    typeName:"不均衡型",
+    subType:"印象残らずタイプ",
+    oneLiner:"話せる。動ける。でも記憶に残っていない",
+    scene:"話した後、相手の記憶に自分が残っていない。「あ、そういえばそんな人いたっけ」という存在になっている。会話は普通にできるし、態度も悪くない。でも次に会っても「あなただったっけ」という薄い反応がある。",
+    strengths:["A（会話開始）やE（進展行動）に一定の機能があり、接触と継続の試みは取れています。","G（アウトカム）にある程度の反応があり、完全に嫌われているわけではありません。"],
+    bottleneck:["D（魅力提示・自己開示）が最大の弱点です。自分の具体的な姿が全く伝わっていないため、相手の記憶に引っかかりが生まれません。「特に何も」「普通ですよ」という答えが積み重なって、印象が薄くなっています。","Rosenberg SESの低さが自信のなさとして現れており、自分を積極的に見せることへの抵抗があります。"],
+    change:"具体的な自己開示が増えることで、記憶に残る存在になります。「そういえばいたね」から「あの人どうしてるかな」への変化が起きます。",
+    actions:["自分の趣味・最近の体験を固有名詞で話す練習をする（「〇〇に先週行きました」など）","「好きなことは？」と聞かれたとき、一言で終わらせず「なぜ好きか」まで答える","自分の仕事について「〇〇の仕事で、最近こんなことがあって」とエピソードを添える","「普通ですよ」「特に何も」を使わないルールを自分に課す"],
+    first_action:"今週の会話で「最近〇〇（具体的な場所・もの）にハマっていて」と一つ具体的な話をする",
+    strategy:"自己開示の具体性が高まることで、共通の話題や価値観を持つ女性からの反応が増えます。記憶に残ることで、相手側からの接触が生まれやすくなります。",
+    expert:"自己開示の返報性と記憶の符号化特異性という観点から、具体的なエピソードを含む自己開示は記憶に定着しやすく、後の想起率が高まります。これが「また連絡したい」という動機につながります。",
+    redefine:"あなたは悪い印象を与えていません。問題は印象が薄いことです。\n\n記憶に残る人と残らない人の差は、多くの場合「具体性」です。今週一つだけ、具体的なことを話してみてください。それだけで、相手の記憶のあなたの解像度が上がります。"
+  },
+  B_C:{
+    tier:"B",color:"#7AFFC0",bg:"#001510",
+    typeName:"不均衡型",
+    subType:"温度差ズレタイプ",
+    oneLiner:"悪くない会話。でも相手の温度感と噛み合っていない",
+    scene:"話しかけるし、会話も続く。でも何となく相手との温度差がある。自分は盛り上がっているつもりなのに相手は引いていたり、逆にこちらが落ち着いているときに相手が乗ってこない。ペースが噛み合わない感覚がある。",
+    strengths:["A（会話開始）かE（進展行動）に一定の機能があり、接触や動く意欲は持っています。","D（自己開示）が機能している場合、話す内容自体は問題ない可能性があります。"],
+    bottleneck:["C（非言語・空気適応）が最大の弱点です。相手のテンション・ペース・話題への反応を読み取る精度が低く、会話の温度感がズレています。良い内容の会話が、タイミングやテンポのズレで減点されています。","BIS行動抑制が弱く、相手が興味を失ったサインを見逃して同じ話題を続けてしまうパターンがあります。"],
+    change:"場の読み方が上がると、会話全体の快適度が大幅に上がります。「話せるけど疲れる」から「話しやすくて楽」への印象変化が起きます。G（アウトカム）の継続反応が増えます。",
+    actions:["相手の返答が短くなったら話題を変えるサインと判断する練習をする","相手が静かな話し方をしたら、自分のテンポと声量も意識的に落とす","会話中に「今、相手はこの話に乗っているか」を意識する習慣をつける","沈黙が来ても2〜3秒は埋めず自然な間を保つ"],
+    first_action:"今週の会話で、相手の返答が短くなった瞬間を一度意識的に観察して、話題を変えることを試みる",
+    strategy:"非言語適応が上がることで、感受性の強い女性・内向的なタイプとの相性が向上します。「この人のペースに合わせてくれる」という安心感が好意形成を促進します。",
+    expert:"ミラーリングと非言語的ペーシングは、相手の無意識の安心感を高める最も有効な手法の一つです。言語的な内容の質よりも、テンポ・声量の適応が「この人といると楽」という感覚を形成します。",
+    redefine:"あなたは行動できています。話しかけられています。あとは『場の温度』を拾う精度を上げるだけです。\n\n相手の返答が短くなったら話題を変える。これだけを今週意識してください。小さな変化ですが、相手の受け取り方が変わります。"
+  },
+  B_A:{
+    tier:"B",color:"#7AFFC0",bg:"#001510",
+    typeName:"不均衡型",
+    subType:"待ちの姿勢タイプ",
+    oneLiner:"能力はある。でも自分から動き出せていない",
+    scene:"声をかけられれば普通に話せる。でも自分からは声をかけられない。気になる人がいても「相手から来るまで待つ」状態になっている。「縁があれば」と思いながら、縁は自分では作れていない。",
+    strengths:["B（共感・傾聴）やD（自己開示）に一定の強みがあり、話し始めれば快適な会話ができます。関係が始まれば継続できる能力は持っています。","G（アウトカム）にある程度の反応があり、接触した相手からの印象は悪くない状態です。"],
+    bottleneck:["A（会話開始・接触行動）が最大の弱点です。自分から声をかける行動が取れておらず、出会いのサンプル数が少ない状態です。「誰かが話しかけてくれれば」という待ちの姿勢が、接触の機会を大幅に制限しています。","NEO-FFI外向性の低さが、接触開始行動への抵抗として現れています。"],
+    change:"接触開始行動が増えることで、現在の強みが活きる場面が増えます。今の成功パターンを新しい相手でも再現できるようになります。",
+    actions:["今月、これまで参加したことのない集まりやイベントに一つ参加する","初対面の場で「30秒以内に隣の人に声をかける」という小さなルールを作る","声をかけるときの最初の一言を「〇〇さんはどちらからいらっしゃいましたか」と定型化する","今週中に、LINEを知っている女性一人に軽くメッセージを送る"],
+    first_action:"今週中に、新しい集まりや場所に参加する予定を一つカレンダーに入れる",
+    strategy:"最初の一言だけ練習すれば、あとは今の強みが機能します。「声をかけることへの抵抗を下げる」だけが今の課題であり、それ以外の能力は揃っています。",
+    expert:"NEO-FFI外向性は固定した特性ではなく、行動の習慣化によって変化します。最初の接触行動を繰り返すことで、コストが下がり自然に動けるようになります。まず行動量を確保することが先決です。",
+    redefine:"あなたの強みは、接触が始まれば機能します。問題は、その接触を自分で起こせていないことです。\n\n一言声をかけるだけでいい。あとは今の自分が動きます。今週、一つだけ自分から声をかけてみてください。"
+  },
+  B_F:{
+    tier:"B",color:"#7AFFC0",bg:"#001510",
+    typeName:"不均衡型",
+    subType:"外見足引きタイプ",
+    oneLiner:"内面の行動は取れている。外見が全体を引き下げている",
+    scene:"話すと「悪くない人」だとわかる。でも見た目の第一印象で弾かれていることが多い。清潔感がない・服装がしっかりしていない・髪が整っていない——こうした外見の問題が、会話が始まる前に評価を下げています。",
+    strengths:["A〜Eのどこかに機能している行動があり、接触の試みや会話の能力は持っています。","G（アウトカム）にある程度の反応があり、接触した相手からの反応は悪くない状態です。"],
+    bottleneck:["F（外見・清潔感）が最大の弱点です。清潔感・服装・身だしなみの管理が不十分で、会話が始まる前の評価を大幅に下げています。どれだけ内面が良くても、外見の印象が悪いと会話の機会自体が減ります。","外見管理が習慣化されておらず、「気が向いたときだけ気にする」状態になっている可能性があります。"],
+    change:"外見管理が習慣化されると、第一印象から高評価を得られるようになります。会話の前からスタートラインが上がり、現在の行動力がより高い成果につながります。",
+    actions:["今月中に美容院・眉カット・スキンケアのいずれか一つを新たに始める","人に会う前日または当日朝に「髪・服・靴・口臭」の4点チェックを習慣にする","服を選ぶとき「清潔感があるか・TPOに合っているか」を基準にする","週1回の運動または食事管理をカレンダーに固定する"],
+    first_action:"今週中に美容院の予約を入れる。または今日から毎朝の鏡チェック（髪・服・靴）を始める",
+    strategy:"外見という入口を整えることが最優先です。内面の行動力はすでに持っているため、外見が整うことで今の行動が最大限に機能するようになります。",
+    expert:"進化心理学的に、外見は社会的シグナルとして機能し、会話が始まる前の初期評価を決定します。清潔感・整った外見は相手の好感度を高め、会話へのハードルを下げます。内面の強みを活かすための必要条件です。",
+    redefine:"あなたは話せます。行動できます。あとは外見という入口を整えるだけです。\n\n外見管理は才能ではなく習慣です。今週一つだけ始めれば、1ヶ月後の第一印象は変わります。今の内面の強みに、外見という入口を加えてください。"
+  },
+
+  // ══ C：未起動型（59点以下） ══
+  C_E:{
+    tier:"C",color:"#FF9966",bg:"#150800",
     typeName:"未起動型",
-    oneLiner:"魅力が機能する構造がまだ十分に構築されていない",
-    desc:"回答から見えてきたのは、「行動の量・質・結果のいずれも、まだ十分に機能していない」という状況です。これは能力の問題ではなく、「行動パターンがまだ組み上がっていない」という構造の問題です。基礎となる行動習慣を一つずつ積み上げることで、状況は変わります。",
-    strengths:[
-      "まだ「意識的に取り組んでいない」という可能性があります。スコアが低い理由が「やっていない」であれば、始めることで急速に変化する余地があります。",
-      "気づいた今がスタートラインです。多くの人は構造的な問題に気づかないまま同じパターンを繰り返します。原因が可視化されたことは、大きな前進です。"
-    ],
-    bottleneck:[
-      "最初に取り組むべきは「接触量の確保」です。どれだけ内面が豊かでも、接触がなければ何も始まりません。まず女性と話す機会そのものを増やすことが最優先です。",
-      "外見・清潔感は最初の評価を決めます。話す前から始まっている評価に対して、最低コストで対応できる部分です。髪・服・靴・口臭の4点を整えることから始めてください。"
-    ],
-    change:"基礎行動が一つ習慣化するたびに、女性の反応が変わり始めます。最初の変化は小さいですが、複数の行動が積み上がった時点で、周囲の反応が目に見えて変わる転換点が来ます。",
-    actions:[
-      "今月、女性と話す機会を意識的に作る（飲み会・習い事・街コンなど、場所は問わない）",
-      "今週、美容院の予約を入れる（直近で行っていない場合）",
-      "人に会う前に必ず「髪・服・靴・口臭」の4点チェックを習慣にする",
-      "会話の終わりに「今日楽しかったです」の一言を必ず言う練習を始める",
-      "LINEを送るとき「感想＋質問」の形を意識する"
-    ],
-    strategy:"最初のターゲットは「話しやすい雰囲気の女性」「共通の趣味がある場所で会う女性」など、接触コストが低い環境を選ぶことが有効です。マッチングアプリよりも、リアルの場での接触から始めることをお勧めします。",
-    expert:"行動科学的に言えば、変化は「行動の積み重ね」から始まります。最初から完璧を目指さず、今週一つだけ変える。来週また一つ変える。この積み上げが、3ヶ月後に大きな差になります。能力は固定されたものではなく、行動の反復によって変化するものです。",
-    first_action:"今日、美容院の予約を入れるか、来週誰かと会う機会を一つ作る連絡をする",
-    redefine:"あなたは「モテない人間」ではなく、「まだ始まっていない人」です。\n\n多くの人が「自分はモテない」と思い込んでいますが、実際は「モテる行動をまだ習慣にしていない」というだけのことがほとんどです。才能や容姿が全てを決めるなら、努力した人が変わるはずがない。でも実際には変わっています。\n\n今のスコアは現時点の行動の記録です。過去でも、未来でもありません。今週一つ変えれば、来月のスコアは変わります。あなたに必要なのは、大きな変革ではありません。今日、一つだけ動くことです。"
+    subType:"行動開始タイプ",
+    oneLiner:"最初の一手が出せていない。動き始めれば変わる",
+    scene:"女性と話す機会はあるが、そこから何も動かせていない。LINEを交換しても連絡しない。気になる人がいても誘えない。「どうせ断られる」「タイミングが悪い」と後から理由をつけて行動しなかった経験が積み重なっている。",
+    strengths:["まだ「意識的に取り組んでいない」段階の可能性があります。スコアが低い理由が行動習慣の未形成であれば、始めることで急速に変化する余地があります。","気づいた今がスタートラインです。原因が可視化されたことは大きな前進です。"],
+    bottleneck:["E（リーダーシップ・進展）が最も大きな改善余地を持つ弱点です。進展行動の不在が、せっかくの接触機会を無駄にしています。LINEを送る・誘う・次を提案する、この三つのどれかから始める必要があります。","「断られるリスク」を過大評価し、「何もしないリスク」を過小評価しています。行動しないことの代償の方が、断られることの代償より確実に大きいです。"],
+    change:"一つの進展行動を始めることで、今まで止まっていた関係が動き始めます。小さな成功体験が積み重なることで、行動へのコストが下がっていきます。",
+    actions:["今週中に、LINEを知っている女性一人に「先日はありがとうございました」と短いメッセージを送る","会話の終わりに「また話しましょう」の代わりに「来週〇曜はどうですか」と言う練習をする","断られても「そうですか、また誘います」の一言で終わらせることを決める","今月、一人に対して明確に「食事に行きませんか」と伝える"],
+    first_action:"今日中に、連絡できていない女性一人に「先日はありがとうございました。〇〇の話が面白かったです」と送る",
+    strategy:"最初は結果より行動量を優先します。断られても行動したことに意味があり、その積み重ねが習慣になります。完璧な一手より、不完全でも動いた一手の方が価値があります。",
+    expert:"行動科学的に、進展行動の回避は「損失回避バイアス」によって生じます。断られることへの恐れが行動を抑制しますが、実際の断られるコストは想定より低く、行動しないコストの方が高いことが研究で示されています。",
+    redefine:"あなたが動けていないのは、能力の問題ではありません。習慣の問題です。\n\n最初の一手を出すことへの抵抗が最も高く、出した後は徐々に楽になります。今日、一つだけ動いてください。それだけで今の状況は変わり始めます。"
+  },
+  C_D:{
+    tier:"C",color:"#FF9966",bg:"#150800",
+    typeName:"未起動型",
+    subType:"存在感形成タイプ",
+    oneLiner:"悪い印象はない。でも『何者か』が全く伝わっていない",
+    scene:"会話しても相手の記憶に残らない。「そういえばそんな人いたっけ」という存在になっている。自分から話すと「普通」「特に何も」が多く、会話が終わっても相手に何も残っていない。",
+    strengths:["まだ始まっていない段階の可能性があります。意識して始めれば変化は大きいです。","嫌われているわけではなく、印象が薄い状態です。マイナスからではなく、ゼロからのスタートです。"],
+    bottleneck:["D（魅力提示・自己開示）が最も改善余地の大きな弱点です。「特に何も」「普通ですよ」という答えが積み重なって、相手の記憶にフックが生まれていません。自分を積極的に見せることへの抵抗が、自己開示の薄さにつながっています。","Rosenberg SESの低さが「どうせ面白くない」という自己評価につながり、自己開示を避ける行動パターンを生んでいます。"],
+    change:"具体的な自己開示が増えることで、相手の記憶に残る存在になります。「誰だっけ」から「あの人また会いたい」への変化が起きます。",
+    actions:["「特に何も」「普通ですよ」を使わないルールを自分に課す","自分の趣味・週末の過ごし方を固有名詞で話す練習をする（「〇〇に先週行きました」など）","「好きなことは？」に対して「なぜ好きか」まで一言添えて答える","仕事の話をするとき「最近こんなことがあって」とエピソードを一つ添える"],
+    first_action:"今週の会話で「特に何も」の代わりに「最近〇〇（固有名詞）が面白くて」と一つ具体的なことを話す",
+    strategy:"自己開示の最初のハードルは高く感じますが、実際は具体的な固有名詞を一つ入れるだけで印象が変わります。「先週〇〇に行きました」この一言から始めてください。",
+    expert:"自己開示は相手の関心と好意を引き出す最も効果的な手法の一つです。具体的なエピソードを含む開示は記憶に残りやすく、後の想起率が高まります。また、開示の返報性により相手も開示を始め、親密度が高まります。",
+    redefine:"あなたは嫌われていません。印象が薄いだけです。\n\nその違いは重要で、マイナスではなくゼロからのスタートです。具体的な一言を一つ追加するだけで、相手の記憶のあなたの解像度が上がります。今週、試してみてください。"
+  },
+  C_C:{
+    tier:"C",color:"#FF9966",bg:"#150800",
+    typeName:"未起動型",
+    subType:"空気形成タイプ",
+    oneLiner:"話せる。でも場の空気が『重くなる』パターンがある",
+    scene:"会話しても何か居心地が悪い。テンションが合わない。相手が引いている感じがするのに、なぜそうなったかわからない。「盛り上がったのに急に冷めた」経験が複数ある。",
+    strengths:["会話をしようとする意欲はあります。接触を取ろうとしている点は評価できます。","まだ始まっていない段階の可能性があり、習慣化によって変化する余地は大きいです。"],
+    bottleneck:["C（非言語・空気適応）が最も改善余地の大きな弱点です。相手のテンション・ペース・話題への反応を読み取る精度が低く、「この人といると疲れる」という印象を与えている可能性があります。","BIS行動抑制が弱く、相手が興味を失ったサインを見逃して同じ話題を続けるパターンが、場を重くしています。"],
+    change:"場の読み方が上がると、会話全体の快適度が変わります。「疲れる」から「楽しい」への印象変化が起きます。継続的な反応が増えます。",
+    actions:["相手の返答が一言になったら話題を変えるシグナルと判断する練習をする","相手が静かな話し方をしたら、自分もテンポと声量を意識的に落とす","沈黙が来ても2〜3秒は埋めずに待つ","「今、相手はこの話題に乗っているか」を会話中に意識する習慣をつける"],
+    first_action:"今週の会話で、相手の返答が短くなったタイミングを一度意識的に観察して、話題を変えることを試みる",
+    strategy:"非言語適応は意識的な練習で改善できます。最初は不自然に感じても、繰り返すことで自然になります。まず「相手の返答の長さを観察する」という一点から始めてください。",
+    expert:"非言語的なペーシング（相手のテンポ・声量に合わせること）は、相手の無意識の安心感を高める最も基礎的なスキルです。言語的な内容より、この適応が「この人といると楽」という感覚を形成します。",
+    redefine:"あなたは話せます。問題は話す内容ではなく、場の温度の読み方です。\n\n相手の返答が短くなったら話題を変える——この一点だけを今週意識してください。小さな変化ですが、相手の受け取り方が変わります。"
+  },
+  C_A:{
+    tier:"C",color:"#FF9966",bg:"#150800",
+    typeName:"未起動型",
+    subType:"接触開始タイプ",
+    oneLiner:"強みはある。でも接触そのものが起きていない",
+    scene:"女性と話す機会がとにかく少ない。出会いがない。「どこで出会えばいいかわからない」「気になる人はいるが声をかけられない」という状態が続いている。行動の機会自体が圧倒的に少ない。",
+    strengths:["B・D・Eのどこかに機能している部分があり、関係が始まれば継続できる能力の芽はあります。","まだ始まっていない段階の可能性が高く、始めれば変化は大きいです。"],
+    bottleneck:["A（会話開始・接触行動）が最も大きな改善余地を持つ弱点です。新規接触の行動が取れておらず、全ての強みが機能する機会自体が生まれていません。「機会があれば」という待ちの姿勢が、全ての改善を妨げています。","NEO-FFI外向性の低さと接触への恐れが、行動のコストを高くしています。"],
+    change:"接触の機会が増えることで、現在眠っている強みが活きる場面が生まれます。一つの出会いが次の出会いにつながる連鎖が始まります。",
+    actions:["今月、これまで参加したことのない集まりやイベントに一つ参加する","声をかけるときの最初の一言を「〇〇はどちらから来たんですか？」と定型化する","マッチングアプリを使っていない場合は始めてみる（行動量確保のため）","今週中に、知っている女性一人に軽くLINEを送る（近況確認で十分）"],
+    first_action:"今日、新しいイベントや集まりに参加する予定をカレンダーに一つ入れる",
+    strategy:"まず接触の機会を作ることが最優先です。質より量を先に確保し、接触することへの抵抗を下げることから始めてください。",
+    expert:"接触の機会は、待っていても増えません。意識的に場を作り、行動を習慣化することで、接触への心理的コストは下がります。まず場所と機会を確保することが、全ての変化の前提です。",
+    redefine:"あなたが変わるために必要なのは、大きなことではありません。今月、一つだけ新しい場所に出ることです。\n\n出会いは確率のゲームです。接触の機会を増やすだけで、今の自分の強みが活きる場面が生まれます。今日、一つだけ予定を入れてください。"
+  },
+  C_F:{
+    tier:"C",color:"#FF9966",bg:"#150800",
+    typeName:"未起動型",
+    subType:"土台整備タイプ",
+    oneLiner:"まず外見という入口から整える",
+    scene:"なかなか女性と話す機会が持てない。声をかけても反応が薄い。「なぜか弾かれている感じがする」という経験がある。内面が問題なのか、外見が問題なのか、よくわからないまま時間が過ぎている。",
+    strengths:["まだ「意識的に始めていない」段階の可能性があります。外見管理を始めることで、接触のスタートラインが大きく変わります。","気づいた今がスタートラインです。原因が可視化されたことは大きな前進です。"],
+    bottleneck:["F（外見・清潔感）が最も大きな改善余地を持つ弱点です。清潔感・服装・身だしなみが整っていないことで、会話が始まる前の評価を大幅に下げています。内面がどれだけ良くても、外見という入口が閉まっていると会話の機会自体が減ります。","外見管理が習慣化されておらず、「気が向いたときだけ」の不定期な状態です。"],
+    change:"外見管理が習慣化されると、接触の機会が増えます。今まで「弾かれていた」状態から、「声をかけてもらえる」状態への変化が起きます。",
+    actions:["今週中に美容院の予約を入れる","毎朝「髪・服・靴」の3点を鏡で確認することを習慣にする","服を選ぶとき「清潔感があるか」を基準に選ぶ","月1回の美容院・眉カット・スキンケアを定期的なルーティンにする"],
+    first_action:"今日、美容院の予約を入れる。または明日から毎朝の鏡チェック（髪・服・靴）を始める",
+    strategy:"外見は最もコスパの高い改善ポイントです。努力や才能ではなく、習慣の問題であるため、始めれば短期間で変化します。まず外見を整えることで、接触の機会そのものが増えます。",
+    expert:"進化心理学・社会心理学の観点から、外見はコミュニケーションが始まる前の初期評価を決定します。清潔感・整った外見は相手の無意識の好感度を高め、接触のハードルを下げます。最初に取り組むべき最優先事項です。",
+    redefine:"あなたが変わるために、まず整えるべきは外見という入口です。\n\n外見管理は才能ではなく習慣です。今週一つだけ始めれば、1ヶ月後の印象は変わります。内面の改善は、その後からで十分です。まず入口を開けることから始めてください。"
   }
 };
 
-// ── State ────────────────────────────────
-let cur=0, ans={}, selVal=null;
+// ── State & Logic ─────────────────────────────
+let cur=0,ans={},selVal=null;
 
 function calcScores(a){
   const raw={};
-  QS.forEach(q=>{const v=a[q.id]||3; raw[q.id]=q.rev?(6-v):v;});
+  QS.forEach(q=>{const v=a[q.id]||3;raw[q.id]=q.rev?(6-v):v;});
   const cs={};
   Object.entries(CAT_DEF).forEach(([cat,def])=>{
     const vals=def.qs.map(id=>raw[id]||3);
@@ -389,21 +559,32 @@ function calcScores(a){
   return{cs,total};
 }
 
-function getResultKey(total){
-  if(total>=120)return'S';
-  if(total>=90)return'A';
-  if(total>=60)return'B';
-  return'C';
+function getTier(t){if(t>=120)return'S';if(t>=90)return'A';if(t>=60)return'B';return'C';}
+
+function getWeakCat(cs){
+  // A〜Fの中でスコア率が最も低いカテゴリ（ただしGHIを除く）
+  // Eだけはmax20なので正規化して比較
+  const cats=['A','B','C','D','E','F'];
+  const maxes={A:20,B:25,C:20,D:15,E:20,F:10};
+  let minRate=999,minCat='E';
+  cats.forEach(cat=>{
+    const rate=cs[cat]/maxes[cat];
+    if(rate<minRate){minRate=rate;minCat=cat;}
+  });
+  return minCat;
+}
+
+function getResultKey(cs,total){
+  const tier=getTier(total);
+  const weak=getWeakCat(cs);
+  const key=`${tier}_${weak}`;
+  return RESULTS[key]?key:`${tier}_E`; // フォールバック
 }
 
 function show(id){document.getElementById(id).style.display='block';}
 function hide(id){document.getElementById(id).style.display='none';}
 
-function startQuiz(){
-  cur=0;ans={};selVal=null;
-  hide('topPage');show('quizPage');
-  renderQ();
-}
+function startQuiz(){cur=0;ans={};selVal=null;hide('topPage');show('quizPage');renderQ();}
 
 function renderQ(){
   const q=QS[cur];
@@ -432,8 +613,9 @@ function selectOpt(v){
   document.querySelectorAll('.opt-btn').forEach((b,i)=>{
     const sel=i+1===v;
     b.classList.toggle('selected',sel);
-    b.querySelector('.opt-num').style.background=sel?'var(--gold)':'rgba(255,255,255,.06)';
-    b.querySelector('.opt-num').style.color=sel?'#000':'var(--muted)';
+    const n=b.querySelector('.opt-num');
+    n.style.background=sel?'var(--gold)':'rgba(255,255,255,.06)';
+    n.style.color=sel?'#000':'var(--muted)';
   });
   document.getElementById('btnNext').disabled=false;
 }
@@ -462,53 +644,39 @@ function showLoading(sc){
 
 function showResult(sc){
   hide('loadingScreen');
-  const key=getResultKey(sc.total);
+  const key=getResultKey(sc.cs,sc.total);
   const d=RESULTS[key];
-  const c=d.color, bg=d.bg;
-
-  // カテゴリバー生成
+  const c=d.color,bg=d.bg;
   let barsHtml='';
   ['A','B','C','D','E','F','G'].forEach(cat=>{
     const def=CAT_DEF[cat];
     const val=sc.cs[cat];
     const pct=Math.round((val/def.max)*100);
-    barsHtml+=`<div class="bar-row">
-      <div class="bar-top"><span class="bar-name">${cat}: ${def.name}</span><span class="bar-val" style="color:${c}">${val}/${def.max}</span></div>
-      <div class="bar-bg"><div class="bar-fill" style="width:${pct}%;background:linear-gradient(90deg,${c}88,${c})"></div></div>
-    </div>`;
+    barsHtml+=`<div class="bar-row"><div class="bar-top"><span class="bar-name">${cat}: ${def.name}</span><span class="bar-val" style="color:${c}">${val}/${def.max}</span></div><div class="bar-bg"><div class="bar-fill" style="width:${pct}%;background:linear-gradient(90deg,${c}88,${c})"></div></div></div>`;
   });
+  const sec=(num,title,content)=>`<div class="result-section"><div class="section-label"><span class="section-num">${String(num).padStart(2,'0')}</span>${title}</div>${content}</div>`;
+  const li=(arr,cls)=>arr.map(s=>`<li class="rl-item ${cls}">${s}</li>`).join('');
 
-  const sec=(num,title,content)=>`
-    <div class="result-section">
-      <div class="section-label"><span class="section-num">${String(num).padStart(2,'0')}</span>${title}</div>
-      ${content}
-    </div>`;
-
-  const listHtml=(arr,cls='')=>arr.map(s=>`<li class="rl-item ${cls}">${s}</li>`).join('');
-
-  let html=`
-  <div class="result-wrap fade-in">
+  const html=`<div class="result-wrap fade-in">
     <div class="rank-card" style="background:${bg};border:.5px solid ${c}22">
       <div class="rank-glow" style="background:radial-gradient(circle,${c}15,transparent 70%)"></div>
       <div class="rank-label">TOTAL SCORE</div>
       <div class="rank-score" style="color:${c};text-shadow:0 0 48px ${c}55">${sc.total}</div>
       <div class="rank-denom">/ 150点</div>
       <div class="rank-badge" style="background:${c}18;color:${c};border:.5px solid ${c}40">${d.typeName}</div>
+      <div class="rank-type">${d.subType}</div>
       <div class="rank-sub">${d.oneLiner}</div>
       <div class="cat-bars">${barsHtml}</div>
     </div>
-
-    ${sec(1,"この診断でわかること",`<div class="section-text">この診断はNEO-FFI・IRI・FIRO-B・ECR・BIS/BAS・Rosenberg SESなど心理学的尺度をもとに、あなたの恋愛市場における行動パターンと結果を定量化しています。スコアは現時点の行動の記録であり、過去でも未来でもありません。</div>`)}
-    ${sec(2,"現状の言語化",`<div class="section-text">${d.desc}</div>`)}
-    ${sec(3,"あなたの強み",`<ul class="result-list">${listHtml(d.strengths,'rl-ok')}</ul>`)}
-    ${sec(4,"ボトルネックと改善ポイント",`<ul class="result-list">${listHtml(d.bottleneck,'rl-warn')}</ul>`)}
-    ${sec(5,"改善したらどう変わるか",`<div class="section-text">${d.change}</div>`)}
-    ${sec(6,"行動レベルの改善策",`<div style="display:flex;flex-direction:column;gap:.5rem">${d.actions.map((a,i)=>`<div class="action-box"><div class="action-label">ACTION ${i+1}</div><div class="action-text">${a}</div></div>`).join('')}</div>`)}
-    ${sec(7,"今日からできる最初の1アクション",`<div class="first-action"><div class="first-action-label">今すぐできること</div><div class="first-action-text">${d.first_action}</div></div>`)}
-    ${sec(8,"恋愛戦略・相性の良い女性のタイプ",`<div class="section-text">${d.strategy}</div>`)}
-    ${sec(9,"専門家コメント",`<div class="highlight-box">${d.expert}</div>`)}
-    ${sec(10,"締め",`<div class="redefine-box">${d.redefine}</div>`)}
-
+    ${sec(1,"今、起きていること",`<div class="section-text">${d.scene}</div>`)}
+    ${sec(2,"あなたの強み",`<ul class="result-list">${li(d.strengths,'rl-ok')}</ul>`)}
+    ${sec(3,"ボトルネック",`<ul class="result-list">${li(d.bottleneck,'rl-warn')}</ul>`)}
+    ${sec(4,"改善したらどう変わるか",`<div class="section-text">${d.change}</div>`)}
+    ${sec(5,"行動レベルの改善策",`<div style="display:flex;flex-direction:column;gap:.5rem">${d.actions.map((a,i)=>`<div class="action-box"><div class="action-label">ACTION ${i+1}</div><div class="action-text">${a}</div></div>`).join('')}</div>`)}
+    ${sec(6,"今日からできる最初の1アクション",`<div class="first-action"><div class="first-action-label">今すぐできること</div><div class="first-action-text">${d.first_action}</div></div>`)}
+    ${sec(7,"恋愛戦略",`<div class="section-text">${d.strategy}</div>`)}
+    ${sec(8,"専門家コメント",`<div class="highlight-box">${d.expert}</div>`)}
+    ${sec(9,"締め",`<div class="redefine-box">${d.redefine}</div>`)}
     <div class="scales-footer">
       <div class="scales-footer-title">使用尺度</div>
       <div class="scales-footer-tags">
@@ -528,8 +696,7 @@ function showResult(sc){
 
 function retryQuiz(){
   cur=0;ans={};selVal=null;
-  hide('resultPage');
-  show('topPage');
+  hide('resultPage');show('topPage');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
